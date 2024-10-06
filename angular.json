@@ -36,8 +36,7 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": false,
-            "envFile": ".env"
+            "prerender": false
           },
           "configurations": {
             "production": {
