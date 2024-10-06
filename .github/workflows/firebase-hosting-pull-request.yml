@@ -14,6 +14,8 @@ jobs:
     
     steps:
 
+
+
       - name: Set up Firebase environment variables
         run: |
           echo "NG_APP_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> .env
@@ -23,7 +25,10 @@ jobs:
           echo "NG_APP_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}" >> .env
           echo "NG_APP_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> .env
           echo "NG_APP_FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}" >> .env
-
+      
+      - name: Debugging: Check .env content
+        run: cat .env || echo ".env file not found"
+        
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
