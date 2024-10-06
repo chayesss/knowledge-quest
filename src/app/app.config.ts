@@ -8,16 +8,18 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes), 
-    provideClientHydration(), 
-    provideFirebaseApp(() => 
-      initializeApp({"projectId":"knowledgequest-dbc73",
-        "appId":"1:179270612276:web:ceb3a227d39d3bde88a161",
-        "databaseURL":"https://knowledgequest-dbc73-default-rtdb.firebaseio.com",
-        "storageBucket":"knowledgequest-dbc73.appspot.com",
-        "apiKey":"AIzaSyAxq-FTbFrtT0pZS-v8fv8tlKizSwFnBmA",
-        "authDomain":"knowledgequest-dbc73.firebaseapp.com",
-        "messagingSenderId":"179270612276"})), 
-        provideAuth(() => getAuth()), provideFirestore(() => getFirestore())]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }),
+  provideRouter(routes),
+  provideClientHydration(),
+  provideFirebaseApp(() =>
+    initializeApp({
+      "projectId": import.meta.env['NG_APP_FIREBASE_PROJECT_ID'],
+      "appId": import.meta.env['NG_APP_FIREBASE_APP_ID'],
+      "databaseURL": import.meta.env['NG_APP_FIREBASE_DATABASE_URL'],
+      "storageBucket": import.meta.env['NG_APP_FIREBASE_STORAGE_BUCKET'],
+      "apiKey": import.meta.env['NG_APP_FIREBASE_API_KEY'],
+      "authDomain": import.meta.env['NG_APP_FIREBASE_AUTH_DOMAIN'],
+      "messagingSenderId": import.meta.env['NG_APP_FIREBASE_MESSAGING_SENDER_ID']
+    })),
+  provideAuth(() => getAuth()), provideFirestore(() => getFirestore())]
 };

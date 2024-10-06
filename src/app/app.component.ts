@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('fetching data...')
+    console.log('fetching data...' + import.meta.env['NG_FIREBASE_MESSAGING_SENDER_ID'])
     var itemCollection = collection(this.firestore, 'items');
     console.log(itemCollection)
     var data = collectionData<item>(itemCollection, { name: 'test' });
