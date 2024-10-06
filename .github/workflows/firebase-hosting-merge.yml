@@ -10,8 +10,32 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+
+      - name: Set up Firebase environment variables
+        run: |
+          touch .env
+          echo "NG_APP_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> .env
+          echo "NG_APP_FIREBASE_AUTH_DOMAIN=${{ secrets.FIREBASE_AUTH_DOMAIN }}" >> .env
+          echo "NG_APP_FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> .env
+          echo "NG_APP_FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}" >> .env
+          echo "NG_APP_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}" >> .env
+          echo "NG_APP_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> .env
+          echo "NG_APP_FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}" >> .env
+      
+      - name: Check .env content
+        run: cat .env || echo ".env file not found"
+
+      - name: List files in the working directory
+        run: ls -alh
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Angular Project
+        run: npm run build -- --configuration production
+        
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
