@@ -10,7 +10,6 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      steps:
       - uses: actions/checkout@v4
 
       - name: Set up Firebase environment variables
@@ -35,7 +34,7 @@ jobs:
 
       - name: Build Angular Project
         run: npm run build -- --configuration production
-        
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
