@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-
-
+      - uses: actions/checkout@v4
 
       - name: Set up Firebase environment variables
         run: |
@@ -30,8 +29,15 @@ jobs:
       - name: Check .env content
         run: cat .env || echo ".env file not found"
 
-      - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+      - name: List files in the working directory
+        run: ls -alh
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Angular Project
+        run: npm run build -- --configuration production
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
