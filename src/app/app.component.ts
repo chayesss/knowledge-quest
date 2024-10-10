@@ -5,14 +5,18 @@ import { Observable } from 'rxjs';
 import { item } from './shared/models/item.model';
 import { CommonModule } from '@angular/common';
 import { namedQuery } from 'firebase/firestore';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, MatSlideToggleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent implements OnInit {
   // DEMONSTRATION ONLY - FIRESTORE LOGIC SHOULD BE MOVED TO A SERVICE LAYER
   title: string = 'knowledge-quest';
