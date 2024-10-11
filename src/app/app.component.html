@@ -1,33 +1,12 @@
 <div>
-  <mat-toolbar class="appbar">
+  <mat-toolbar class="app-bar">
     <span>Knowledge Quest</span>
     <span class="appbar-spacer"></span>
     <button mat-button>Dashboard</button>
     <button mat-button>Quests</button>
     <button mat-button>Profile</button>
   </mat-toolbar>
-  <div>
-
+  <div class="app-container">
+    <router-outlet />
   </div>
 </div>
-
-
-
-
-
-<div>
-  <mat-slide-toggle>Toggle me!</mat-slide-toggle>
-</div> <br />
-
-<div>
-  <button mat-flat-button (click)="onCreateItem(test)">test button</button>
-</div>
-
-<h3>Stuff: </h3>
-<div *ngIf="items !== undefined">
-  <div *ngFor="let item of items">
-    <p>{{item.name}} - {{item.createdOn}}</p>
-  </div>
-</div>
-
-<router-outlet />

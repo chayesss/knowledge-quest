@@ -1,0 +1,14 @@
+<div>
+    <mat-slide-toggle>Toggle me!</mat-slide-toggle>
+  </div> <br />
+  
+  <div>
+    <button mat-flat-button (click)="onCreateItem(test)">test button</button>
+  </div>
+  
+  <h3>Stuff: </h3>
+  <div *ngIf="items !== undefined">
+    <div *ngFor="let item of items">
+      <p>{{item.name}} - {{item.createdOn}}</p>
+    </div>
+</div>
