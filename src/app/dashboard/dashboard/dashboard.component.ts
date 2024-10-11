@@ -2,13 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { item } from '../../shared/models/item.model';
 import { Firestore, collectionData, collection, addDoc, CollectionReference } from '@angular/fire/firestore';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatButton } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card'
+import { MatGridListModule } from '@angular/material/grid-list'
+import { MatInputModule } from '@angular/material/input'
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatSlideToggle, MatButton],
+  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
