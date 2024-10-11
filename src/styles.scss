@@ -1,2 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/rose-red.css';
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$knowledge-quest-theme: mat.define-theme((color: (theme-type: light,
+                primary: mat.$red-palette,
+            ),
+            // typography: (brand-family: 'Comic Sans',
+            //     bold-weight: 900,
+            // ),
+        ));
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    @include mat.all-component-themes($knowledge-quest-theme);
+
+    background: linear-gradient(to bottom right, #ffebee, #ffcdd2);
+    min-height: 100vh;
+}
+
+.app-background {}

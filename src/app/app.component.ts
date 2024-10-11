@@ -7,12 +7,14 @@ import { CommonModule } from '@angular/common';
 import { namedQuery } from 'firebase/firestore';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatButtonModule } from '@angular/material/button'
+import { MatToolbar } from '@angular/material/toolbar'
+import { MatIcon } from '@angular/material/icon'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, MatSlideToggleModule],
+  imports: [RouterOutlet, CommonModule, MatSlideToggleModule, MatButtonModule, MatToolbar, MatIcon],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
