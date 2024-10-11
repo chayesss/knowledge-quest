@@ -1,16 +1,12 @@
 <div>
-  <mat-slide-toggle>Toggle me!</mat-slide-toggle>
-</div> <br />
-
-<div>
-  <button (click)="onCreateItem(test)">test button</button>
-</div>
-
-<h3>Stuff: </h3>
-<div *ngIf="items !== undefined">
-  <div *ngFor="let item of items">
-    <p>{{item.name}} - {{item.createdOn}}</p>
+  <mat-toolbar class="app-bar">
+    <span>Knowledge Quest</span>
+    <span class="appbar-spacer"></span>
+    <button mat-button>Dashboard</button>
+    <button mat-button>Quests</button>
+    <button mat-button>Profile</button>
+  </mat-toolbar>
+  <div class="app-container">
+    <router-outlet />
   </div>
 </div>
-
-<router-outlet />

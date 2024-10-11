@@ -1,0 +1,16 @@
+.app-bar {
+    background: linear-gradient(to bottom right, #db2626, #86000d);
+    color: white;
+
+    button {
+        color: white;
+    }
+}
+
+.appbar-spacer {
+    flex: 1 1 auto;
+}
+
+.app-container {
+    margin: 1rem;
+}
