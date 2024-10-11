@@ -2,13 +2,17 @@
 
 @include mat.core();
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
 $knowledge-quest-theme: mat.define-theme((color: (theme-type: light,
                 primary: mat.$red-palette,
             ),
-            // typography: (brand-family: 'Comic Sans',
-            //     bold-weight: 900,
-            // ),
+            typography: (brand-family: 'Roboto',
+                bold-weight: 900,
+            ),
         ));
+
+
 
 body {
     margin: 0;
@@ -20,6 +24,6 @@ html {
 
     background: linear-gradient(to bottom right, #ffebee, #ffcdd2);
     min-height: 100vh;
-}
 
-.app-background {}
+    font-family: Roboto;
+}
