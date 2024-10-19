@@ -1,0 +1,31 @@
+.login-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+}
+
+mat-form-field {
+    display: block;
+    margin-bottom: 1em;
+}
+
+button {
+    width: 100%;
+}
+
+mat-card-header {
+    justify-content: center;
+    padding: 2rem;
+}
+
+.signup-prompt {
+    padding-bottom: 2rem;
+}
+
+.login-error {
+    color: #d22f26;
+}
+
+p {
+    margin-top: 0;
+}
