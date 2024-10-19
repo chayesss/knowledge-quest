@@ -2,9 +2,8 @@
   <mat-toolbar class="app-bar">
     <span>Knowledge Quest</span>
     <span class="appbar-spacer"></span>
-    <button mat-button>Dashboard</button>
-    <button mat-button>Quests</button>
-    <button mat-button>Profile</button>
+    <button mat-button [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >Dashboard</button>
+    <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Log in</button>
   </mat-toolbar>
   <div class="app-container">
     <router-outlet />
