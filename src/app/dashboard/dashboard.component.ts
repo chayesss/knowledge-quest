@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { item } from '../../shared/models/item.model';
+import { item } from '../shared/models/item.model';
 import { Firestore, collectionData, collection, addDoc, CollectionReference } from '@angular/fire/firestore';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
