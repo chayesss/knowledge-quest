@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { Observable, of } from 'rxjs';
 
@@ -29,7 +29,8 @@ export class SignupComponent {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.signupForm = this.formBuilder.group({
       emailCtrl: ['', [Validators.required, Validators.email]],
@@ -46,7 +47,7 @@ export class SignupComponent {
       } else {
         this.authService.signUp(this.signupForm.value.emailCtrl, this.signupForm.value.passwordCtrl).subscribe({
           next: data => {
-            console.log('signup success')
+            this.router.navigate(['dashboard'])
           },
           error: e => {
             this.errorMsg = 'Sign up failed'
