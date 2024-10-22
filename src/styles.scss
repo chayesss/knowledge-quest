@@ -1,2 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/rose-red.css';
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+$knowledge-quest-theme: mat.define-theme((color: (theme-type: light,
+                primary: mat.$red-palette,
+            ),
+            typography: (brand-family: 'Roboto',
+                bold-weight: 900,
+            ),
+        ));
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    @include mat.all-component-themes($knowledge-quest-theme);
+
+    background: linear-gradient(to bottom right, #ffebee, #ffcdd2);
+    min-height: 100vh;
+
+    font-family: Roboto;
+}
