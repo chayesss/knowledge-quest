@@ -2,17 +2,19 @@
   <mat-toolbar class="app-bar">
     <span>Knowledge Quest</span>
     <span class="appbar-spacer"></span>
-    <button mat-button [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >Dashboard</button>
+    <button mat-button [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</button>
     @if (user) {
-      <div>User: {{user.email}}</div>
-      
-      <button mat-button (click)="logout()" >Log out</button>
+    <div>User: {{user.email}}</div>
+
+    <button mat-button (click)="logout()">Log out</button>
     }
     @else {
-      <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Log in</button>
+    <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active">Log in</button>
     }
   </mat-toolbar>
   <div class="app-container">
     <router-outlet />
   </div>
 </div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
