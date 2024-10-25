@@ -5,8 +5,8 @@
     <mat-form-field class="search-field">
       <input matInput placeholder="Search for Quests">
     </mat-form-field>
-      <button mat-flat-button (click)="onCreateItem(test)">Create Quest</button>
-      <button mat-flat-button >Submit Questions</button>
+    <button mat-flat-button (click)="onCreateItem(test)">Create Quest</button>
+    <button mat-flat-button (click)="openSubmitQuestionDialog()">Submit Questions</button>
   </div>
 
   <div *ngIf="items !== undefined">

@@ -7,7 +7,7 @@
 $knowledge-quest-theme: mat.define-theme((color: (theme-type: light,
                 primary: mat.$red-palette,
             ),
-            typography: (brand-family: 'Roboto',
+            typography: (brand-family: 'Roboto, Material Icons',
                 bold-weight: 900,
             ),
         ));

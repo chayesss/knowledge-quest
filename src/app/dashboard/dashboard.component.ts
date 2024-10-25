@@ -7,6 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatInputModule } from '@angular/material/input'
+import { MatDialog } from '@angular/material/dialog';
+import { SubmitQuestionDialogComponent } from './submit-question-dialog/submit-question-dialog.component';
+import { DialogConfig } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +26,7 @@ export class DashboardComponent {
 
   constructor(
     private firestore: Firestore,
+    private dialog: MatDialog,
   ) {
   }
 
@@ -43,5 +47,12 @@ export class DashboardComponent {
     var docRef = await addDoc(collection(this.firestore, 'items'), item);
 
     console.log('Doc written with ID: ', docRef.id)
+  }
+
+  openSubmitQuestionDialog() {
+    this.dialog.open(SubmitQuestionDialogComponent, {
+      minWidth: '700px',
+      height: '550px'
+    })
   }
 }
