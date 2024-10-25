@@ -72,8 +72,6 @@ export class SubmitQuestionDialogComponent {
 
   submitQuestion() {
     if (this.questionForm.valid) {
-      console.log('Submitted:', this.questionForm.value);
-
       var answers = this.questionForm.value.answers.map((answer: { text: any; correct: any; }) => {
         var tempAnswer: Answer = {
           answerText: answer.text,
