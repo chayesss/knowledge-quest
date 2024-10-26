@@ -10,6 +10,10 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog';
 import { SubmitQuestionDialogComponent } from './submit-question-dialog/submit-question-dialog.component';
 import { DialogConfig } from '@angular/cdk/dialog';
+import { NewQuestDialogComponent } from './new-quest-dialog/new-quest-dialog.component';
+import { QuestService } from '../shared/services/quest.service';
+import { get } from 'http';
+import { NewQuest } from '../shared/models/quest.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,20 +25,19 @@ import { DialogConfig } from '@angular/cdk/dialog';
 export class DashboardComponent {
   // DEMONSTRATION ONLY - FIRESTORE LOGIC SHOULD BE MOVED TO A SERVICE LAYER
   title: string = 'knowledge-quest';
-  items: item[] = [];
+  quests: NewQuest[] = [];
   test: string = 'testing'
 
   constructor(
     private firestore: Firestore,
     private dialog: MatDialog,
+    private QuestService: QuestService
   ) {
   }
 
   ngOnInit(): void {
-    var itemCollection = collection(this.firestore, 'items');
-    console.log(itemCollection)
-    var data = collectionData<item>(itemCollection, { name: 'test' });
-    data.subscribe((data: item[]) => this.items = data)
+    var getQuest = this.QuestService.getNewQuest().subscribe((data: any) => {this.quests = data}) ;
+ 
   }
 
   async onCreateItem(name: string) {
@@ -51,6 +54,13 @@ export class DashboardComponent {
 
   openSubmitQuestionDialog() {
     this.dialog.open(SubmitQuestionDialogComponent, {
+      minWidth: '700px',
+      height: '550px'
+    })
+  }
+
+  openNewQuestDialog() {
+    this.dialog.open(NewQuestDialogComponent, {
       minWidth: '700px',
       height: '550px'
     })
