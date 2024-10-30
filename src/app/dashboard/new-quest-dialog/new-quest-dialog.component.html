@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Create New Quest</h2>
+<mat-dialog-content>
+    <form [formGroup]="newQuestForm">
+        <div>
+        <mat-form-field appearance="outline" class="half-width" style="padding-right: 5px;">
+            <mat-label>Quest Name</mat-label>
+            <input matInput formControlName="questName" placeholder="Enter your Quest Name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width" style="padding-left: 5px;">
+            <mat-label>Quest Subject</mat-label>
+            <input matInput formControlName="questSubject" placeholder="Enter your Quest Subject">
+        </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Quest Description</mat-label>
+            <input matInput formControlName="questDescription" placeholder="Enter your Quest Description">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button mat-dialog-close color="primary" (click)="submitNewQuest()"
+        [disabled]="!newQuestForm.valid">Submit</button>
+</mat-dialog-actions>

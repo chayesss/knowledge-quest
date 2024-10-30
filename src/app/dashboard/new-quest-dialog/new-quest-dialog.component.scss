@@ -1,0 +1,12 @@
+
+@use '@angular/material' as mat;
+
+.half-width {
+    padding-top: 1rem;
+    width: 49%;
+}
+
+.full-width {
+    padding-top: 1rem;
+    width: 100%;
+}
