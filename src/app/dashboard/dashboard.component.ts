@@ -10,10 +10,11 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog';
 import { SubmitQuestionDialogComponent } from './submit-question-dialog/submit-question-dialog.component';
 import { DialogConfig } from '@angular/cdk/dialog';
-import { NewQuestDialogComponent } from './new-quest-dialog/new-quest-dialog.component';
+import { QuestDialogComponent } from './new-quest-dialog/new-quest-dialog.component';
 import { QuestService } from '../shared/services/quest.service';
 import { get } from 'http';
-import { NewQuest } from '../shared/models/quest.model';
+import { quest } from '../shared/models/quest.model';
+import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +26,7 @@ import { NewQuest } from '../shared/models/quest.model';
 export class DashboardComponent {
   // DEMONSTRATION ONLY - FIRESTORE LOGIC SHOULD BE MOVED TO A SERVICE LAYER
   title: string = 'knowledge-quest';
-  quests: NewQuest[] = [];
+  quests: quest[] = [];
   test: string = 'testing'
 
   constructor(
@@ -36,9 +37,14 @@ export class DashboardComponent {
   }
 
   ngOnInit(): void {
-    var getQuest = this.QuestService.getNewQuest().subscribe((data: any) => {this.quests = data}) ;
+    var getQuest = this.QuestService.getQuest().subscribe((data: any) => {this.quests = data}) ;
  
   }
+
+  trackByIndex(index: number, quest: any): number {
+    return index;
+  }
+  
 
   async onCreateItem(name: string) {
 
@@ -59,10 +65,19 @@ export class DashboardComponent {
     })
   }
 
-  openNewQuestDialog() {
-    this.dialog.open(NewQuestDialogComponent, {
+  openQuestDialog() {
+    this.dialog.open(QuestDialogComponent, {
       minWidth: '700px',
       height: '550px'
     })
   }
+
+  openEditQuestDialog(quest: any): void {
+    this.dialog.open(EditQuestDialogComponent, {
+      minWidth: '700px',
+      height: '550px',
+      data: quest
+    });
+  }
+
 }

@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Create New Quest</h2>
+<h2 mat-dialog-title>Edit Quest</h2>
 <mat-dialog-content>
-    <form [formGroup]="QuestForm">
+    <form [formGroup]="editQuestForm">
         <div>
         <mat-form-field appearance="outline" class="half-width" style="padding-right: 5px;">
             <mat-label>Quest Name</mat-label>
@@ -20,6 +20,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-flat-button mat-dialog-close color="primary" (click)="submitQuest()"
-        [disabled]="!QuestForm.valid">Submit</button>
+    <button mat-flat-button color="primary" (click)="onEditSubmit()" [disabled]="!editQuestForm.valid">Update</button>
 </mat-dialog-actions>
