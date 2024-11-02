@@ -1,4 +1,4 @@
-export interface NewQuest {
+export interface quest {
     questName: string,
     questDescription: string,
     questSubject: string

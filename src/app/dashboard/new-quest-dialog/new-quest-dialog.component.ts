@@ -12,7 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { QuestService } from '../../shared/services/quest.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
-import { NewQuest } from '../../shared/models/quest.model';
+import { quest } from '../../shared/models/quest.model';
 
 @Component({
   selector: 'app-new-quest-dialog',
@@ -32,32 +32,32 @@ import { NewQuest } from '../../shared/models/quest.model';
   templateUrl: './new-quest-dialog.component.html',
   styleUrl: './new-quest-dialog.component.scss'
 })
-export class NewQuestDialogComponent {
+export class QuestDialogComponent {
 
-  newQuestForm: FormGroup;
+  QuestForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private newQuestService: QuestService,
+    private questService: QuestService,
     private snackBar: MatSnackBar
 
   ) {
-    this.newQuestForm = this.formBuilder.group({
+    this.QuestForm = this.formBuilder.group({
       questName: ['', Validators.required],
       questDescription: [''],
       questSubject: ['', Validators.required]
     });
   }
 
-  submitNewQuest() {
-    if (this.newQuestForm.valid) {
-      var newQuest: NewQuest = {
-        questName: this.newQuestForm.value.questName,
-        questDescription: this.newQuestForm.value.questDescription,
-        questSubject: this.newQuestForm.value.questSubject
+  submitQuest() {
+    if (this.QuestForm.valid) {
+      var quest: quest = {
+        questName: this.QuestForm.value.questName,
+        questDescription: this.QuestForm.value.questDescription,
+        questSubject: this.QuestForm.value.questSubject
       }
     
-      this.newQuestService.submitNewQuest(newQuest).subscribe({
+      this.questService.submitQuest(quest).subscribe({
         next: (response: any) => {
           this.snackBar.open('Quest Submitted! ID: ' + response.id, '', {
             duration: 3000
