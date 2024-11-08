@@ -16,19 +16,18 @@ import { User } from 'firebase/auth';
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   user: User | undefined;
-  
+
 
   constructor(
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe({
       next: user => {
         this.user = user!
-        console.log(this.user)
       },
       error: e => {
 
