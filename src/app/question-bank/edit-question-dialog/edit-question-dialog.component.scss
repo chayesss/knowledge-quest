@@ -1,0 +1,26 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .options-container {
+    margin-top: 16px;
+  }
+  
+  .option-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  
+    mat-form-field {
+      flex: 1;
+    }
+  
+    mat-checkbox {
+      margin-left: 8px;
+    }
+  
+    button {
+      align-self: center;
+    }
+  }

@@ -1,0 +1,152 @@
+mat-card {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 0 auto;
+    position: relative; /* For positioning the button */
+    display: flex;
+    flex-direction: column; /* Ensures the title and content stack vertically */
+    
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    mat-card-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 16px; /* Added padding at the top of the title */
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    mat-card-content {
+      flex-grow: 1; /* Allow the content to take up remaining space */
+      overflow: auto; /* Enables scrolling when content overflows */
+      ul {
+        list-style-type: none;
+        padding: 0;
+    
+        li {
+          display: flex;
+          justify-content: space-between; 
+          align-items: center; 
+          background-color: #ffffff;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          margin-bottom: 8px;
+          padding: 8px 12px;
+          font-size: 14px;
+          color: #555;
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+          transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    
+          &:hover {
+            background-color: #f0f0f0;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+          }
+    
+          mat-icon {
+            margin-left: auto;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  
+    /* Button hidden by default */
+    .card-action-btn {
+      display: none; 
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      background-color: #ff0015;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
+    
+      &:hover {
+        background-color: #b3000f;
+      }
+    }
+    
+    /* Show button on hover */
+    &:hover .card-action-btn {
+      display: inline-block;
+    }
+  }
+  
+  .grid-container {
+    max-width: 1000px;
+  }
+  
+  .button-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .search-field {
+    display: flex;
+    align-items: center;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    height: 0px;
+  }
+  
+  /* General Layout */
+  mat-grid-list {
+    padding: 16px;
+    gap: 16px; 
+    --card-width: 300px;
+  }
+  
+  mat-grid-tile {
+    width: var(--card-width);
+    max-width: 100%; 
+  }
+  
+  /* Style for each option item */
+  .option-item {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 8px;
+  
+    mat-icon {
+      margin-left: auto; 
+      font-size: 20px; 
+    }
+  }
+  
+  .checkmark {
+    color: green; /* Green checkmark */
+  }
+  
+  .crossmark {
+    color: red; /* Red cross */
+  }
+  
+  @media (max-width: 768px) {
+    mat-grid-list {
+      --card-width: 250px; 
+    }
+  
+    mat-grid-tile {
+      width: var(--card-width);
+    }
+  
+    mat-card {
+      width: var(--card-width);
+    }
+  }
+  
