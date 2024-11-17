@@ -21,18 +21,19 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class QuestionBankComponent {
 
-  questions$: Observable<any[]>; 
+  questions$: Observable<any[]>;
 
   constructor(private firestore: Firestore, private dialog: MatDialog) {
-    const questionsCollection = collection(this.firestore, 'submittedQuestions'); 
-    this.questions$ = collectionData(questionsCollection, { idField: 'id' }); 
+    const questionsCollection = collection(this.firestore, 'submittedQuestions');
+    this.questions$ = collectionData(questionsCollection, { idField: 'id' });
 
-}
+  }
 
   openEditQuestionDialog(question: any): void {
     this.dialog.open(EditQuestionDialogComponent, {
-      width: '600px',
-      data: { questionId: question.id }
+      minWidth: '700px',
+      height: '550px',
+      data: question
     });
   }
 }

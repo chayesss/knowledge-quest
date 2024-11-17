@@ -11,18 +11,18 @@ import { User } from 'firebase/auth';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatSlideToggleModule, MatButtonModule, MatToolbar, MatIcon],
+  imports: [RouterModule, CommonModule, MatButtonModule, MatToolbar, MatIcon],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   user: User | undefined;
-  
+
 
   constructor(
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe({
