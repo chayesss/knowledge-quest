@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,11 +13,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { QuestService } from '../../shared/services/quest.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
 import { quest } from '../../shared/models/quest.model';
+import { AuthService } from '../../shared/services/auth.service';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-new-quest-dialog',
   standalone: true,
-  imports: [CommonModule, 
+  imports: [CommonModule,
     MatCardModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -35,13 +37,21 @@ import { quest } from '../../shared/models/quest.model';
 export class QuestDialogComponent {
 
   QuestForm: FormGroup;
+  currentUser: User | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private questService: QuestService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
 
   ) {
+    this.authService.getCurrentUser().subscribe(user => {
+      if (user) {
+        this.currentUser = user;
+      }
+    });
+
     this.QuestForm = this.formBuilder.group({
       questName: ['', Validators.required],
       questDescription: [''],
@@ -54,9 +64,11 @@ export class QuestDialogComponent {
       var quest: quest = {
         questName: this.QuestForm.value.questName,
         questDescription: this.QuestForm.value.questDescription,
-        questSubject: this.QuestForm.value.questSubject
+        questSubject: this.QuestForm.value.questSubject,
+        createdBy: this.currentUser!.uid,
+        createdOn: new Date()
       }
-    
+
       this.questService.submitQuest(quest).subscribe({
         next: (response: any) => {
           this.snackBar.open('Quest Submitted! ID: ' + response.id, '', {

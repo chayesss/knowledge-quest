@@ -13,6 +13,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Answer, SubmittedQuestion } from '../../shared/models/question.model';
 import { SubmitQuestionService } from '../../shared/services/submit-question.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
+import { AuthService } from '../../shared/services/auth.service';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-submit-question-dialog',
@@ -35,12 +37,21 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
 export class SubmitQuestionDialogComponent {
 
   questionForm: FormGroup;
+  currentUser: User | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private questionService: SubmitQuestionService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {
+
+    this.authService.getCurrentUser().subscribe(user => {
+      if (user) {
+        this.currentUser = user;
+      }
+    });
+
     this.questionForm = this.formBuilder.group({
       question: ['', Validators.required],
       answers: this.formBuilder.array([])
@@ -84,7 +95,9 @@ export class SubmitQuestionDialogComponent {
       var question: SubmittedQuestion = {
         questionText: this.questionForm.value.question,
         options: answers,
-        status: "PENDING"
+        status: "PENDING",
+        createdBy: this.currentUser!.uid,
+        createdOn: new Date()
       }
 
       this.questionService.submitQuestion(question).subscribe({
