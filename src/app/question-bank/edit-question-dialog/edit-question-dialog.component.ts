@@ -13,7 +13,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Answer, SubmittedQuestion } from '../../shared/models/question.model';
 import { SubmitQuestionService } from '../../shared/services/submit-question.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
-import { QuestService } from '../../shared/services/quest.service';
 
 @Component({
   selector: 'app-edit-question-dialog',
@@ -39,7 +38,7 @@ export class EditQuestionDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private questService: QuestService,
+    private questionService: SubmitQuestionService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<EditQuestionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
@@ -56,7 +55,6 @@ export class EditQuestionDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.data)
     // Populate the form with the data if available
     if (this.data) {
       this.editQuestionForm.patchValue({
@@ -73,7 +71,6 @@ export class EditQuestionDialogComponent implements OnInit {
         this.answers.push(newAnswerGroup)
       });
     }
-    console.log(this.editQuestionForm)
   }
 
   get answers() {
@@ -86,7 +83,6 @@ export class EditQuestionDialogComponent implements OnInit {
       correct: [false]
     });
     this.answers.push(newAnswerGroup);
-    console.log(this.answers)
   }
 
   removeAnswer(index: number) {
@@ -94,6 +90,28 @@ export class EditQuestionDialogComponent implements OnInit {
   }
 
   updateQuestion() {
-    throw new Error('Method not implemented.');
+    var answers = this.editQuestionForm.value.answers.map((answer: { text: any; correct: any; }) => {
+      var tempAnswer: Answer = {
+        answerText: answer.text,
+        isCorrect: answer.correct,
+      }
+
+      return tempAnswer;
+    });
+
+    var question: SubmittedQuestion = {
+      questionText: this.editQuestionForm.value.question,
+      options: answers,
+      status: "PENDING"
+    }
+
+    this.questionService.updateQuestion(question, this.data.id).subscribe({
+      next: data => {
+        this.snackBar.open('Question updated successfully!', ' ', { duration: 3000 })
+      },
+      error: err => {
+        this.snackBar.open('Failed to update question', ' ', { duration: 3000 })
+      }
+    })
   }
 }
