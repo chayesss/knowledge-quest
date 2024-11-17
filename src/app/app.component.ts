@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button'
 import { MatToolbar } from '@angular/material/toolbar'
 import { MatIcon } from '@angular/material/icon'
@@ -11,27 +11,29 @@ import { User } from 'firebase/auth';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatSlideToggleModule, MatButtonModule, MatToolbar, MatIcon],
+  imports: [RouterModule, CommonModule, MatButtonModule, MatToolbar, MatIcon, MatProgressSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   user: User | undefined;
-  
+  loadingUser: boolean = false;
+
 
   constructor(
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.loadingUser = true;
     this.authService.getCurrentUser().subscribe({
       next: user => {
         this.user = user!
-        console.log(this.user)
+        this.loadingUser = false
       },
       error: e => {
-
+        console.error(e)
       }
     })
   }
