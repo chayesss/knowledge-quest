@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { from, Observable } from 'rxjs';
 export class AuthService {
 
   constructor(
-    private auth: Auth
+    private auth: Auth,
+    private router: Router
   ) { }
 
   signIn(email: string, password: string) {
@@ -20,6 +22,7 @@ export class AuthService {
   }
 
   signOut() {
+    this.router.navigate(['/login']);
     return signOut(this.auth);
   }
 
