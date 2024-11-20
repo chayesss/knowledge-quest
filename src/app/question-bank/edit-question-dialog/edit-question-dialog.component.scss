@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+.full-width {
+  padding-top: 1rem;
+  width: 100%;
+}
+
+.answer-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  @include mat.form-field-density(-5)
+}
+
+.answer-input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.content {
+  padding-top: 1rem;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.toggle-container {
+  width: 20%;
+}
+
+.add-answer button {
+  width: 100%;
+}
