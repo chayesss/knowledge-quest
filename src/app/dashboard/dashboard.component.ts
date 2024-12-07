@@ -8,13 +8,14 @@ import { MatCardModule } from '@angular/material/card'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialog } from '@angular/material/dialog';
-import { SubmitQuestionDialogComponent } from './submit-question-dialog/submit-question-dialog.component';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { QuestDialogComponent } from './new-quest-dialog/new-quest-dialog.component';
 import { QuestService } from '../shared/services/quest.service';
 import { get } from 'http';
 import { quest } from '../shared/models/quest.model';
 import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
+import { User } from 'firebase/auth';
+import { AuthService } from '/knowledge-quest/src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,13 +28,20 @@ export class DashboardComponent {
   // DEMONSTRATION ONLY - FIRESTORE LOGIC SHOULD BE MOVED TO A SERVICE LAYER
   title: string = 'knowledge-quest';
   quests: quest[] = [];
-  test: string = 'testing'
+  test: string = 'testing';
+  user: User | undefined;
 
   constructor(
     private firestore: Firestore,
     private dialog: MatDialog,
-    private QuestService: QuestService
+    private QuestService: QuestService,
+    private authService: AuthService
   ) {
+    this.authService.getCurrentUser().subscribe((currentUser) => {
+      if (currentUser) {
+        this.user = currentUser;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -58,12 +66,7 @@ export class DashboardComponent {
     console.log('Doc written with ID: ', docRef.id)
   }
 
-  openSubmitQuestionDialog() {
-    this.dialog.open(SubmitQuestionDialogComponent, {
-      minWidth: '700px',
-      height: '550px'
-    })
-  }
+  
 
   openQuestDialog() {
     this.dialog.open(QuestDialogComponent, {
