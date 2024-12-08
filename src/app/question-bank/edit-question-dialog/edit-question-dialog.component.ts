@@ -43,12 +43,14 @@ export class EditQuestionDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<EditQuestionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       questionText: any;
+      subject: any;
       options: any;
       id: string,
     }
   ) {
     this.editQuestionForm = this.formBuilder.group({
       question: ['', Validators.required],
+      subject: ['', Validators.required],
       answers: this.formBuilder.array([])
     });
   }
@@ -59,6 +61,7 @@ export class EditQuestionDialogComponent implements OnInit {
     if (this.data) {
       this.editQuestionForm.patchValue({
         question: this.data.questionText,
+        subject: this.data.subject,
       });
 
 
@@ -101,6 +104,7 @@ export class EditQuestionDialogComponent implements OnInit {
 
     var question: SubmittedQuestion = {
       questionText: this.editQuestionForm.value.question,
+      subject: this.editQuestionForm.value.subject,
       options: answers,
       status: "PENDING"
     }
