@@ -11,7 +11,7 @@ import { User } from 'firebase/auth';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatButtonModule, MatToolbar, MatProgressSpinnerModule],
+  imports: [RouterModule, CommonModule, MatButtonModule, MatToolbar, MatProgressSpinnerModule, MatIcon],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
