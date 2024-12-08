@@ -15,7 +15,7 @@ import { get } from 'http';
 import { quest } from '../shared/models/quest.model';
 import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
 import { User } from 'firebase/auth';
-import { AuthService } from '/knowledge-quest/src/app/shared/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
 import { MatIcon } from '@angular/material/icon';
 import { EditQuestionDialogComponent } from './edit-question-dialog/edit-question-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { SubmitQuestionDialogComponent } from '/knowledge-quest/src/app/dashboard/submit-question-dialog/submit-question-dialog.component';
+import { SubmitQuestionDialogComponent } from '../dashboard/submit-question-dialog/submit-question-dialog.component';
 import { User } from 'firebase/auth';
-import { AuthService } from '/knowledge-quest/src/app/shared/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 
 
 @Component({
