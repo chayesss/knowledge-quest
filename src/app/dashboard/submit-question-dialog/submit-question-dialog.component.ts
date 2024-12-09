@@ -54,6 +54,7 @@ export class SubmitQuestionDialogComponent {
 
     this.questionForm = this.formBuilder.group({
       question: ['', Validators.required],
+      subject: ['', Validators.required],
       answers: this.formBuilder.array([])
     });
   }
@@ -94,6 +95,7 @@ export class SubmitQuestionDialogComponent {
 
       var question: SubmittedQuestion = {
         questionText: this.questionForm.value.question,
+        subject: this.questionForm.value.subject,
         options: answers,
         status: "PENDING",
         createdBy: this.currentUser!.uid,
