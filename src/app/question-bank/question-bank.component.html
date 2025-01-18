@@ -4,27 +4,33 @@
     <mat-form-field class="search-field">
       <input matInput placeholder="Search for Questions">
     </mat-form-field>
+    <button mat-flat-button (click)="openSubmitQuestionDialog()">Submit Questions</button>
   </div>
 
   <div *ngIf="questions$ | async as questions; else loading">
     <mat-grid-list cols="5" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let question of questions">
-        <mat-card class="question-card">
-          <mat-card-title>{{ question.questionText }}</mat-card-title>
+      <ng-container *ngFor="let question of questions">
+        <mat-grid-tile>
+          <mat-card class="question-card">
+            <mat-card-title>{{ question.questionText }}</mat-card-title>
+            <mat-card-subtitle>{{ question.subject }}</mat-card-subtitle>
+            <mat-card-content>
+              <ul>
+                <li *ngFor="let option of question.options" class="option-item">
+                  {{ option.answerText }}
+                  <mat-icon *ngIf="option.isCorrect" color="primary" class="checkmark">check_circle</mat-icon>
+                  <mat-icon *ngIf="!option.isCorrect" color="warn" class="crossmark">cancel</mat-icon>
+                </li>
+              </ul>
+            </mat-card-content>
   
-          <mat-card-content>
-            <ul>
-              <li *ngFor="let option of question.options" class="option-item">
-                {{ option.answerText }}
-                <mat-icon *ngIf="option.isCorrect" color="primary" class="checkmark">check_circle</mat-icon>
-                <mat-icon *ngIf="!option.isCorrect" color="warn" class="crossmark">cancel</mat-icon>
-              </li>
-            </ul>
-          </mat-card-content>
-  
-          <button mat-button class="card-action-btn" (click)="openEditQuestionDialog(question)">Edit Question</button>
-        </mat-card>
-      </mat-grid-tile>
+            <!-- Show edit button only if user is the creator -->
+            <button *ngIf="user?.uid === question.createdBy" mat-button class="card-action-btn" (click)="openEditQuestionDialog(question)">
+              Edit Question
+            </button>
+          </mat-card>
+        </mat-grid-tile>
+      </ng-container>
     </mat-grid-list>
   </div>
   

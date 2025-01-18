@@ -6,7 +6,6 @@
       <input matInput placeholder="Search for Quests">
     </mat-form-field>
     <button mat-flat-button (click)="openQuestDialog()">Create Quest</button>
-    <button mat-flat-button (click)="openSubmitQuestionDialog()">Submit Questions</button>
   </div>
 
   <div *ngIf="quests !== undefined">
@@ -14,22 +13,27 @@
       <mat-grid-tile *ngFor="let quest of quests; let i = index; trackBy: trackByIndex">
         <mat-card appearance="outlined">
           <mat-card-header>
-            <mat-card-title>{{quest.questName}}</mat-card-title>
-            <mat-card-subtitle>{{quest.questSubject}}</mat-card-subtitle>
+            <mat-card-title>{{ quest.questName }}</mat-card-title>
+            <mat-card-subtitle>{{ quest.questSubject }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            {{quest.questDescription}}
+            {{ quest.questDescription }}
           </mat-card-content>
           <mat-card-actions>
             <div>
               <button mat-flat-button>Start Quest</button>
-              <button mat-flat-button (click)="openEditQuestDialog(quest)">Edit Quest</button>
+  
+              <!-- Show edit button only if user is the creator -->
+              <button *ngIf="user?.uid === quest.createdBy" mat-flat-button (click)="openEditQuestDialog(quest)">
+                Edit Quest
+              </button>
             </div>
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+  
   
 
 </div>
