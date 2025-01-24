@@ -21,6 +21,11 @@
             (click)="openEditQuestionDialog(question)">
             Edit Question
           </button>
+          <!-- Show edit button only if user is the creator -->
+          <button *ngIf="!questionsEditable" mat-button class="card-action-btn"
+            (click)="addQuestionToQuest(question)">
+            Add Question
+          </button>
         </mat-card>
       </mat-grid-tile>
     </ng-container>

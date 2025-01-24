@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-edit-quest-dialog',
@@ -41,11 +41,12 @@ export class EditQuestDialogComponent implements OnInit {
     private questService: QuestService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<EditQuestDialogComponent>,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: {
       questName: any;
       questDescription: any;
       questSubject: any; id: string, questData: quest 
-}
+  }
   ) {
     this.editQuestForm = this.formBuilder.group({
       questName: ['', Validators.required],
@@ -75,8 +76,10 @@ export class EditQuestDialogComponent implements OnInit {
       });
     }
   }
-
   onAddQuestion() {
-    // re route to version of the question bank page that allows anybody to add a question
+    this.dialogRef.close(true);
+    this.router.navigate(['/quest/add-questions/', this.data.id], {
+      state: {quest: this.data}
+    })
   }
 }

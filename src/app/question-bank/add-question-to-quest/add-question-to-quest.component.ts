@@ -15,15 +15,29 @@ import { SubmitQuestionDialogComponent } from '../../dashboard/submit-question-d
 import { AuthService } from '../../shared/services/auth.service';
 import { EditQuestionDialogComponent } from '../edit-question-dialog/edit-question-dialog.component';
 import { quest } from '../../shared/models/quest.model';
+import { QuestionsComponent } from "../questions/questions.component";
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { QuestService } from '../../shared/services/quest.service';
 
 @Component({
   selector: 'app-add-question-to-quest',
   standalone: true,
-  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatIcon],
+  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatIcon, QuestionsComponent, RouterModule],
   templateUrl: './add-question-to-quest.component.html',
   styleUrl: './add-question-to-quest.component.scss'
 })
 export class AddQuestionToQuestComponent {
-  @Input() quest!: quest;
-  
+  quest: quest | null = null;
+
+  constructor(
+    private route: ActivatedRoute,
+    private questService: QuestService,
+  ) {
+    this.route.params.subscribe(params => {
+      this.questService.getQuestById(params['id']).subscribe(quest => {
+        this.quest = quest;
+        console.log(this.quest);
+      });
+    });
+  }
 }

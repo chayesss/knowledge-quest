@@ -84,4 +84,8 @@ export class QuestionsComponent {
       height: '550px'
     })
   }
+
+  addQuestionToQuest(question: SubmittedQuestion) {
+    
+  }
 }
