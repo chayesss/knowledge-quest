@@ -75,4 +75,8 @@ export class EditQuestDialogComponent implements OnInit {
       });
     }
   }
+
+  onAddQuestion() {
+    // re route to version of the question bank page that allows anybody to add a question
+  }
 }

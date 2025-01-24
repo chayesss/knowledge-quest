@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { SubmittedQuestion } from '../models/question.model';
 import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubmitQuestionService {
+export class QuestionService {
 
   constructor(
     private firestore: Firestore
@@ -21,5 +21,10 @@ export class SubmitQuestionService {
     const questDocRef = doc(this.firestore, `submittedQuestions/${id}`);
     console.log(questDocRef)
     return from(updateDoc(questDocRef, { ...question }));
+  }
+
+  getQuestions() {
+    const questionsCollection = collection(this.firestore, 'submittedQuestions');
+    return from(collectionData(questionsCollection, { idField: 'id' }));
   }
 }

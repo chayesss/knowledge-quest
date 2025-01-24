@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Answer, SubmittedQuestion } from '../../shared/models/question.model';
-import { SubmitQuestionService } from '../../shared/services/submit-question.service';
+import { QuestionService } from '../../shared/services/question.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
 
 @Component({
@@ -38,7 +38,7 @@ export class EditQuestionDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private questionService: SubmitQuestionService,
+    private questionService: QuestionService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<EditQuestionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
