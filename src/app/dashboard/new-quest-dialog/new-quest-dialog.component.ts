@@ -76,8 +76,6 @@ export class QuestDialogComponent {
           this.snackBar.open('Quest Created! ID: ' + response.id, '', {
             duration: 3000
           })
-          console.log("WET FARTS")
-          console.log(response)
           this.router.navigate(['/quest/add-questions/', response.id])
         },
         error: (err: any) => {

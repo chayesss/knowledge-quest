@@ -36,7 +36,6 @@ export class AddQuestionToQuestComponent {
     this.route.params.subscribe(params => {
       this.questService.getQuestById(params['id']).subscribe(quest => {
         this.quest = quest;
-        console.log(this.quest);
       });
     });
   }

@@ -17,9 +17,7 @@ export class QuestionService {
   }
 
   updateQuestion(question: SubmittedQuestion, id: string) {
-    console.log(question)
     const questDocRef = doc(this.firestore, `submittedQuestions/${id}`);
-    console.log(questDocRef)
     return from(updateDoc(questDocRef, { ...question }));
   }
 

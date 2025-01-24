@@ -75,7 +75,6 @@ export class SubmitQuestionDialogComponent {
       correct: [false]
     });
     this.answers.push(newAnswerGroup);
-    console.log(this.answers)
   }
 
   removeAnswer(index: number) {
