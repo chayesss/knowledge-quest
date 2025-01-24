@@ -3,6 +3,7 @@ import { addDoc, collection, collectionData, doc, Firestore, getDoc, updateDoc }
 import { quest } from '../models/quest.model';
 import { from, Observable } from 'rxjs';
 import { item } from '../models/item.model';
+import { SubmittedQuestion } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,11 @@ export class QuestService {
   updateQuest(id: string, updatedQuest: Partial<quest>) {
     const questDocRef = doc(this.firestore, `submittedNewQuest/${id}`);
     return from(updateDoc(questDocRef, { ...updatedQuest }));
+  }
+
+  addQuestionToQuest(quest: quest, question: SubmittedQuestion) { 
+    quest.questions.push(question);
+    const questDocRef = doc(this.firestore, `submittedNewQuest/${quest.id}`);
+    return from(updateDoc(questDocRef, { questions: [...quest.questions] }));
   }
 }

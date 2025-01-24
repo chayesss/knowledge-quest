@@ -66,7 +66,8 @@ export class QuestDialogComponent {
         questDescription: this.QuestForm.value.questDescription,
         questSubject: this.QuestForm.value.questSubject,
         createdBy: this.currentUser!.uid,
-        createdOn: new Date()
+        createdOn: new Date(),
+        questions: []
       }
 
       this.questService.submitQuest(quest).subscribe({

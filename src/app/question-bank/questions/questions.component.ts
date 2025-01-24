@@ -19,6 +19,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QuestionService } from '../../shared/services/question.service';
 import { quest } from '../../shared/models/quest.model';
+import { QuestService } from '../../shared/services/quest.service';
 
 @Component({
   selector: 'app-questions',
@@ -47,7 +48,8 @@ export class QuestionsComponent {
     private dialog: MatDialog,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private questService: QuestService
   ) { }
 
   ngOnInit() {
@@ -86,6 +88,19 @@ export class QuestionsComponent {
   }
 
   addQuestionToQuest(question: SubmittedQuestion) {
-    
+    if (this.quest) {
+      this.questService.addQuestionToQuest(this.quest, question).subscribe({
+        next: (response: any) => {
+          this.snackBar.open('Question added to quest!', '', {
+            duration: 3000
+          });
+        },
+        error: (err: any) => {
+          this.snackBar.open('Failed to add question to quest ' + err, '', {
+            duration: 3000,
+          });
+        }
+       });
+    }
   }
 }
