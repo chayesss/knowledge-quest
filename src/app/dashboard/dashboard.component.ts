@@ -25,7 +25,6 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  // DEMONSTRATION ONLY - FIRESTORE LOGIC SHOULD BE MOVED TO A SERVICE LAYER
   title: string = 'knowledge-quest';
   quests: quest[] = [];
   test: string = 'testing';
@@ -45,28 +44,12 @@ export class DashboardComponent {
   }
 
   ngOnInit(): void {
-    var getQuest = this.QuestService.getQuest().subscribe((data: any) => {this.quests = data}) ;
- 
+    this.QuestService.getQuest().subscribe((data: any) => {this.quests = data}) ;
   }
 
   trackByIndex(index: number, quest: any): number {
     return index;
   }
-  
-
-  async onCreateItem(name: string) {
-
-    var item: item = {
-      name: name,
-      createdOn: Date.now().toString(),
-    }
-
-    var docRef = await addDoc(collection(this.firestore, 'items'), item);
-
-    console.log('Doc written with ID: ', docRef.id)
-  }
-
-  
 
   openQuestDialog() {
     this.dialog.open(QuestDialogComponent, {

@@ -14,37 +14,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { SubmitQuestionDialogComponent } from '../dashboard/submit-question-dialog/submit-question-dialog.component';
 import { User } from 'firebase/auth';
 import { AuthService } from '../shared/services/auth.service';
+import { QuestionsComponent } from "./questions/questions.component";
 
 
 @Component({
   selector: 'app-question-bank',
   standalone: true,
-  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatIcon],
+  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatIcon, QuestionsComponent],
   templateUrl: './question-bank.component.html',
   styleUrl: './question-bank.component.scss'
 })
 export class QuestionBankComponent {
-  [x: string]: any;
-  user: User | undefined;
-  questions$: Observable<any[]>;
-
-  constructor(private firestore: Firestore, private dialog: MatDialog, private authService: AuthService) {
-    const questionsCollection = collection(this.firestore, 'submittedQuestions');
-    this.questions$ = collectionData(questionsCollection, { idField: 'id' });
-    this.authService.getCurrentUser().subscribe((currentUser) => {
-      if (currentUser) {
-        this.user = currentUser;
-      }
-    });
-  }
-
-  
-  openEditQuestionDialog(question: any): void {
-    this.dialog.open(EditQuestionDialogComponent, {
-      minWidth: '700px',
-      height: '550px',
-      data: question
-    });
+  constructor(
+    private dialog: MatDialog,
+    private authService: AuthService) {
   }
 
   openSubmitQuestionDialog() {

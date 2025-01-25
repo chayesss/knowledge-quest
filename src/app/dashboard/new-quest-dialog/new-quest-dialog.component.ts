@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { QuestService } from '../../shared/services/quest.service';
@@ -43,8 +43,9 @@ export class QuestDialogComponent {
     private formBuilder: FormBuilder,
     private questService: QuestService,
     private snackBar: MatSnackBar,
-    private authService: AuthService
-
+    private authService: AuthService,
+    private dialogRef: MatDialog,
+    private router: Router,
   ) {
     this.authService.getCurrentUser().subscribe(user => {
       if (user) {
@@ -66,17 +67,19 @@ export class QuestDialogComponent {
         questDescription: this.QuestForm.value.questDescription,
         questSubject: this.QuestForm.value.questSubject,
         createdBy: this.currentUser!.uid,
-        createdOn: new Date()
+        createdOn: new Date(),
+        questions: []
       }
 
       this.questService.submitQuest(quest).subscribe({
         next: (response: any) => {
-          this.snackBar.open('Quest Submitted! ID: ' + response.id, '', {
+          this.snackBar.open('Quest Created! ID: ' + response.id, '', {
             duration: 3000
           })
+          this.router.navigate(['/quest/add-questions/', response.id])
         },
         error: (err: any) => {
-          this.snackBar.open('Quest Failed to Submit ' + err, '', {
+          this.snackBar.open('Quest Failed to Create ' + err, '', {
             duration: 3000,
           })
         }

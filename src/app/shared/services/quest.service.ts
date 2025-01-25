@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
 import { quest } from '../models/quest.model';
 import { from, Observable } from 'rxjs';
 import { item } from '../models/item.model';
+import { SubmittedQuestion } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,24 @@ export class QuestService {
     return data;
   }
 
+  getQuestById(id: string): Observable<quest> {
+    const questDocRef = doc(this.firestore, `submittedNewQuest/${id}`);
+    const data = getDoc(questDocRef).then(doc => {
+      const questData = doc.data() as quest;
+      questData.id = doc.id;
+      return questData;
+    });
+    return from(data);
+  }
+
   updateQuest(id: string, updatedQuest: Partial<quest>) {
     const questDocRef = doc(this.firestore, `submittedNewQuest/${id}`);
     return from(updateDoc(questDocRef, { ...updatedQuest }));
+  }
+
+  addQuestionToQuest(quest: quest, question: SubmittedQuestion) { 
+    quest.questions.push(question);
+    const questDocRef = doc(this.firestore, `submittedNewQuest/${quest.id}`);
+    return from(updateDoc(questDocRef, { questions: [...quest.questions] }));
   }
 }

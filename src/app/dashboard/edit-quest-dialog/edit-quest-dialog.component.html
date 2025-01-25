@@ -2,21 +2,28 @@
 <mat-dialog-content>
     <form [formGroup]="editQuestForm">
         <div>
-        <mat-form-field appearance="outline" class="half-width" style="padding-right: 5px;">
-            <mat-label>Quest Name</mat-label>
-            <input matInput formControlName="questName" placeholder="Enter your Quest Name">
-        </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width" style="padding-right: 5px;">
+                <mat-label>Quest Name</mat-label>
+                <input matInput formControlName="questName" placeholder="Enter your Quest Name">
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width" style="padding-left: 5px;">
-            <mat-label>Quest Subject</mat-label>
-            <input matInput formControlName="questSubject" placeholder="Enter your Quest Subject">
-        </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width" style="padding-left: 5px;">
+                <mat-label>Quest Subject</mat-label>
+                <input matInput formControlName="questSubject" placeholder="Enter your Quest Subject">
+            </mat-form-field>
         </div>
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Quest Description</mat-label>
             <input matInput formControlName="questDescription" placeholder="Enter your Quest Description">
         </mat-form-field>
     </form>
+
+    <div class="add-question">
+        <button mat-stroked-button type="button" (click)="onAddQuestion()">
+            <mat-icon fontIcon="add"></mat-icon> Add Questions
+        </button>
+    </div>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
