@@ -16,15 +16,17 @@ import { quest } from '../shared/models/quest.model';
 import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
 import { User } from 'firebase/auth';
 import { AuthService } from '../shared/services/auth.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule],
+  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+
   title: string = 'knowledge-quest';
   quests: quest[] = [];
   test: string = 'testing';
@@ -34,7 +36,8 @@ export class DashboardComponent {
     private firestore: Firestore,
     private dialog: MatDialog,
     private QuestService: QuestService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.authService.getCurrentUser().subscribe((currentUser) => {
       if (currentUser) {
@@ -66,4 +69,10 @@ export class DashboardComponent {
     });
   }
 
+
+  previewQuest(questId: any) {
+    this.router.navigate(['/quest/preview/', questId], {
+      state: {quest: questId}
+    })
+  }
 }
