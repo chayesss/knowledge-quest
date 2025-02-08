@@ -4,7 +4,8 @@ export interface SubmittedQuestion {
     options: Answer[],
     status: string,
     createdBy?: string,
-    createdOn?: Date
+    createdOn?: Date,
+    questId?: string;
 }
 
 export interface Answer {

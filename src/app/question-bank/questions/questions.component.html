@@ -1,5 +1,4 @@
-@if (questions) {
-<div>
+<div *ngIf="questions.length > 0; else loading">
   <mat-grid-list cols="5" rowHeight="1:1">
     <ng-container *ngFor="let question of questions">
       <mat-grid-tile>
@@ -7,29 +6,37 @@
           <mat-card-title>{{ question.questionText }}</mat-card-title>
           <mat-card-subtitle>{{ question.subject }}</mat-card-subtitle>
           <mat-card-content>
-            <ul>
-              <li *ngFor="let option of question.options" class="option-item">
-                {{ option.answerText }}
-                <mat-icon *ngIf="option.isCorrect" color="primary" class="checkmark">check_circle</mat-icon>
-                <mat-icon *ngIf="!option.isCorrect" color="warn" class="crossmark">cancel</mat-icon>
-              </li>
-            </ul>
+            <ng-container *ngIf="!hideAnswers">
+              <ul>
+                <li *ngFor="let option of question.options" class="option-item">
+                  {{ option.answerText }}
+                  <mat-icon *ngIf="option.isCorrect" color="primary" class="checkmark">check_circle</mat-icon>
+                  <mat-icon *ngIf="!option.isCorrect" color="warn" class="crossmark">cancel</mat-icon>
+                </li>
+              </ul>
+            </ng-container>
           </mat-card-content>
 
           <!-- Show edit button only if user is the creator -->
-          <button *ngIf="user?.uid === question.createdBy && questionsEditable" mat-button class="card-action-btn"
-            (click)="openEditQuestionDialog(question)">
+          <button *ngIf="user?.uid === question.createdBy && questionsEditable" 
+            mat-button class="card-action-btn"
+            (click)="editQuestion.emit(question)">
             Edit Question
           </button>
-          <!-- Show edit button only if user is the creator -->
-          <button *ngIf="!questionsEditable" mat-button class="card-action-btn"
-            (click)="addQuestionToQuest(question)">
-            Add Question
+
+          <button *ngIf="!questionsEditable" 
+              mat-button class="card-action-btn"
+              (click)="addQuestionToQuest.emit(question)">
+              Add Question
           </button>
+
         </mat-card>
       </mat-grid-tile>
     </ng-container>
   </mat-grid-list>
 </div>
-} @else {
-<div class="center-spinner"><mat-spinner></mat-spinner></div>}
+
+<!-- Loading spinner -->
+<ng-template #loading>
+  <div class="center-spinner"><mat-spinner></mat-spinner></div>
+</ng-template>

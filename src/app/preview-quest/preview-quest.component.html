@@ -1,24 +1,55 @@
 <div class="container">
   <mat-card class="quest-details">
     <mat-card-header>
-      <mat-card-title>{{quest?.questName}}</mat-card-title>
-      <mat-card-subtitle>{{quest?.questDescription}}</mat-card-subtitle>
+      <mat-card-title>{{ quest?.questName }}</mat-card-title>
+      <mat-card-subtitle>{{ quest?.questDescription }}</mat-card-subtitle>
       <span class="spacer"></span>
       <button mat-icon-button (click)="openEditQuestDialog(quest)">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-header>
     <mat-card-content>
-      <mat-chip color="primary" selected>{{quest?.questSubject}}</mat-chip>
+      <mat-chip color="primary" selected>{{ quest?.questSubject }}</mat-chip>
     </mat-card-content>
   </mat-card>
 
   <mat-tab-group (selectedTabChange)="onTabChange($event)">
     <mat-tab label="Preview Questions">
-      <app-questions></app-questions>
+      <ng-container *ngIf="quest; else loading">
+        <!-- Check if there are questions associated with the quest -->
+        <div *ngIf="quest?.questions?.length === 0; else questionsAssigned">
+          <p>No questions have been assigned to this quest.</p>
+        </div>
+
+        <ng-template #questionsAssigned>
+          <app-questions [quest]="quest" 
+                          [questions]="quest?.questions || []" 
+                          [questionsEditable]="false" 
+                          [hideAnswers]="true"></app-questions>
+        </ng-template>
+      </ng-container>
     </mat-tab>
+
     <mat-tab label="Manage Questions">
-      <app-questions></app-questions>
+      <ng-container *ngIf="quest; else loading">
+        <div *ngIf="quest?.questions?.length === 0; else manageQuestions">
+          <p>No questions have been assigned to this quest.</p>
+        </div>
+
+        <ng-template #manageQuestions>
+          <app-questions 
+            [quest]="quest"    
+            [questions]="quest?.questions || []" 
+            [questionsEditable]="false">
+          </app-questions>
+        </ng-template>
+      </ng-container>
     </mat-tab>
   </mat-tab-group>
+
+  <ng-template #loading>
+    <div class="center-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </div>
