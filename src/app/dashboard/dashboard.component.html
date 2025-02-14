@@ -21,19 +21,11 @@
           </mat-card-content>
           <mat-card-actions>
             <div>
-              <button mat-flat-button>Start Quest</button>
-  
-              <!-- Show edit button only if user is the creator -->
-              <button *ngIf="user?.uid === quest.createdBy" mat-flat-button (click)="openEditQuestDialog(quest)">
-                Edit Quest
-              </button>
+              <button mat-flat-button (click)="previewQuest(quest.id)">Preview Quest</button>
             </div>
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  
-  
-
 </div>

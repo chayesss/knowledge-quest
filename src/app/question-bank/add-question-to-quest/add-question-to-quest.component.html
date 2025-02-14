@@ -1,7 +1,18 @@
-@if (quest) {
-  <h1>Add questions to {{quest.questName}}</h1>
-  <h3>{{quest.questDescription}}</h3>
-
-  <app-questions [quest]="quest"></app-questions>
-}
-
+<div *ngIf="quest">
+    <h1>Add questions to {{ quest?.questName }}</h1>
+  
+    <!-- Pass the onAddToQuest method as a handler for adding questions -->
+    <app-questions 
+      [quest]="quest" 
+      [questions]="allQuestions"
+      [questionsEditable]="false"
+      (addQuestionToQuest)="onAddToQuest($event)">
+    </app-questions>
+  </div>
+  
+  <ng-template #loading>
+    <div class="center-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+  

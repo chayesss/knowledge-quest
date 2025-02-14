@@ -1,14 +1,22 @@
 <h1>Question Bank</h1>
 
-  <div class="button-row">
-    <mat-form-field class="search-field">
-      <input matInput placeholder="Search for Questions">
-    </mat-form-field>
-    <button mat-flat-button (click)="openSubmitQuestionDialog()">Submit Questions</button>
-  </div>
-  
-  <app-questions></app-questions>
-  
-  <ng-template #loading>
-    <p>Loading questions...</p>
-  </ng-template>
+<div class="button-row">
+  <mat-form-field class="search-field">
+    <input matInput placeholder="Search for Questions">
+  </mat-form-field>
+  <button mat-flat-button (click)="openSubmitQuestionDialog()">Submit Questions</button>
+</div>
+
+<!-- Pass data to app-questions -->
+<app-questions
+  [user]="user"
+  [questions]="questions"
+  [quest]="quest"
+  (editQuestion)="openEditQuestionDialog($event)"
+  (addQuestionToQuest)="addQuestionToQuest($event)"
+></app-questions>
+
+<!-- Loading state -->
+<ng-template #loading>
+  <p>Loading questions...</p>
+</ng-template>
