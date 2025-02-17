@@ -25,9 +25,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './add-question-to-quest.component.html',
   styleUrl: './add-question-to-quest.component.scss'
 })
-export class AddQuestionToQuestComponent {
+export class AddQuestionToQuestComponent implements OnInit {
   quest: quest | null = null;
-  allQuestions: SubmittedQuestion[] = []; // Store all questions here
+  allQuestions: SubmittedQuestion[] = []; // Store all questions
+  filteredQuestions: SubmittedQuestion[] = []; // Store filtered questions
   
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +45,21 @@ export class AddQuestionToQuestComponent {
     // Fetch all questions
     this.questionService.getQuestions().subscribe(questions => {
       this.allQuestions = questions;
+      this.filteredQuestions = questions; // Set initial filtered questions to all questions
     });
+  }
+
+  ngOnInit(): void {}
+
+  // Method to filter questions based on the input text
+  filterQuestions(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      const searchTerm = target.value.trim().toLowerCase();
+      this.filteredQuestions = this.allQuestions.filter(q =>
+        q.questionText.toLowerCase().includes(searchTerm)
+      );
+    }
   }
 
   // Add question to the quest by calling the existing method

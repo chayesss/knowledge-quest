@@ -1,41 +1,46 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { item } from '../shared/models/item.model';
-import { Firestore, collectionData, collection, addDoc, CollectionReference } from '@angular/fire/firestore';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card'
-import { MatGridListModule } from '@angular/material/grid-list'
-import { MatInputModule } from '@angular/material/input'
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogConfig } from '@angular/cdk/dialog';
-import { QuestDialogComponent } from './new-quest-dialog/new-quest-dialog.component';
-import { QuestService } from '../shared/services/quest.service';
-import { get } from 'http';
-import { quest } from '../shared/models/quest.model';
-import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
-import { User } from 'firebase/auth';
-import { AuthService } from '../shared/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { QuestDialogComponent } from './new-quest-dialog/new-quest-dialog.component';
+import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
+import { QuestService } from '../shared/services/quest.service';
+import { AuthService } from '../shared/services/auth.service';
+import { quest } from '../shared/models/quest.model';
+import { User } from 'firebase/auth';
+import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatSlideToggleModule, MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatInputModule,
+    RouterModule,
+    FormsModule // Include FormsModule here
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-
   title: string = 'knowledge-quest';
   quests: quest[] = [];
-  test: string = 'testing';
+  filteredQuests: quest[] = []; // List for displaying filtered quests
+  searchTerm: string = '';
   user: User | undefined;
 
   constructor(
-    private firestore: Firestore,
     private dialog: MatDialog,
-    private QuestService: QuestService,
+    private questService: QuestService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -47,21 +52,33 @@ export class DashboardComponent {
   }
 
   ngOnInit(): void {
-    this.QuestService.getQuest().subscribe((data: any) => {this.quests = data}) ;
+    this.questService.getQuest().subscribe((data: quest[]) => {
+      this.quests = data;
+      this.filteredQuests = data; // Initialize filtered list
+    });
   }
 
-  trackByIndex(index: number, quest: any): number {
+  trackByIndex(index: number, quest: quest): number {
     return index;
+  }
+
+  filterQuests() {
+    const lowerSearchTerm = this.searchTerm.toLowerCase();
+    this.filteredQuests = this.quests.filter(q =>
+      q.questName.toLowerCase().includes(lowerSearchTerm) ||
+      (q.questSubject && q.questSubject.toLowerCase().includes(lowerSearchTerm)) ||
+      (q.questDescription && q.questDescription.toLowerCase().includes(lowerSearchTerm))
+    );
   }
 
   openQuestDialog() {
     this.dialog.open(QuestDialogComponent, {
       minWidth: '700px',
       height: '550px'
-    })
+    });
   }
 
-  openEditQuestDialog(quest: any): void {
+  openEditQuestDialog(quest: quest): void {
     this.dialog.open(EditQuestDialogComponent, {
       minWidth: '700px',
       height: '550px',
@@ -69,10 +86,9 @@ export class DashboardComponent {
     });
   }
 
-
-  previewQuest(questId: any) {
+  previewQuest(questId: string) {
     this.router.navigate(['/quest/preview/', questId], {
-      state: {quest: questId}
-    })
+      state: { quest: questId }
+    });
   }
 }

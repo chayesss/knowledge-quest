@@ -3,14 +3,14 @@
 
   <div class="button-row">
     <mat-form-field class="search-field">
-      <input matInput placeholder="Search for Quests">
+      <input matInput placeholder="Search for Quests" [(ngModel)]="searchTerm" (input)="filterQuests()">
     </mat-form-field>
     <button mat-flat-button (click)="openQuestDialog()">Create Quest</button>
   </div>
 
-  <div *ngIf="quests !== undefined">
+  <div *ngIf="filteredQuests.length > 0; else noResults">
     <mat-grid-list cols="3" class="grid-container">
-      <mat-grid-tile *ngFor="let quest of quests; let i = index; trackBy: trackByIndex">
+      <mat-grid-tile *ngFor="let quest of filteredQuests; let i = index; trackBy: trackByIndex">
         <mat-card appearance="outlined">
           <mat-card-header>
             <mat-card-title>{{ quest.questName }}</mat-card-title>
@@ -21,11 +21,15 @@
           </mat-card-content>
           <mat-card-actions>
             <div>
-              <button mat-flat-button (click)="previewQuest(quest.id)">Preview Quest</button>
+              <button mat-flat-button (click)="quest.id ? previewQuest(quest.id) : null">Preview Quest</button>
             </div>
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+
+  <ng-template #noResults>
+    <p>No quests found.</p>
+  </ng-template>
 </div>

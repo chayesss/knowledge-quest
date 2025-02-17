@@ -1,18 +1,28 @@
 <div *ngIf="quest">
-    <h1>Add questions to {{ quest?.questName }}</h1>
+  <h1>Add questions to {{ quest?.questName }}</h1>
   
-    <!-- Pass the onAddToQuest method as a handler for adding questions -->
-    <app-questions 
-      [quest]="quest" 
-      [questions]="allQuestions"
-      [questionsEditable]="false"
-      (addQuestionToQuest)="onAddToQuest($event)">
-    </app-questions>
+  <!-- Search input for filtering questions -->
+  <mat-form-field class="search-field">
+    <input matInput placeholder="Search for Questions" (input)="filterQuestions($event)">
+  </mat-form-field>
+
+  <!-- Check if there are no filtered questions -->
+  <div *ngIf="filteredQuestions.length === 0">
+    <p>No questions found</p>
   </div>
-  
-  <ng-template #loading>
-    <div class="center-spinner">
-      <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
-  
+
+  <!-- Pass filtered questions to the QuestionsComponent -->
+  <app-questions 
+    *ngIf="filteredQuestions.length > 0" 
+    [quest]="quest" 
+    [questions]="filteredQuestions"
+    [questionsEditable]="false"
+    (addQuestionToQuest)="onAddToQuest($event)">
+  </app-questions>
+</div>
+
+<ng-template #loading>
+  <div class="center-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -2,21 +2,27 @@
 
 <div class="button-row">
   <mat-form-field class="search-field">
-    <input matInput placeholder="Search for Questions">
+    <input matInput placeholder="Search for Questions" (input)="filterQuestions($event)">
   </mat-form-field>
   <button mat-flat-button (click)="openSubmitQuestionDialog()">Submit Questions</button>
 </div>
 
-<!-- Pass data to app-questions -->
+<!-- No questions found message -->
+<div *ngIf="filteredQuestions.length === 0 && !loading">
+  <p>No questions found.</p>
+</div>
+
+<!-- Loading state -->
+<div *ngIf="loading">
+  <p>Loading questions...</p>
+</div>
+
+<!-- Pass filtered data to app-questions -->
 <app-questions
+  *ngIf="filteredQuestions.length > 0"
   [user]="user"
-  [questions]="questions"
+  [questions]="filteredQuestions"
   [quest]="quest"
   (editQuestion)="openEditQuestionDialog($event)"
   (addQuestionToQuest)="addQuestionToQuest($event)"
 ></app-questions>
-
-<!-- Loading state -->
-<ng-template #loading>
-  <p>Loading questions...</p>
-</ng-template>
