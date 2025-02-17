@@ -17,6 +17,7 @@ import { quest } from '../shared/models/quest.model';
 import { QuestService } from '../shared/services/quest.service';
 import { SubmittedQuestion } from '../shared/models/question.model';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-question-bank',
@@ -30,7 +31,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatIcon,
     MatSnackBarModule,
-    QuestionsComponent
+    QuestionsComponent,
+    FormsModule // Added for ngModel
   ],
   templateUrl: './question-bank.component.html',
   styleUrl: './question-bank.component.scss'
@@ -38,7 +40,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class QuestionBankComponent implements OnInit {
   user!: User | null;
   questions: SubmittedQuestion[] = [];
-  quest: quest | null = null; // This can be set dynamically
+  filteredQuestions: SubmittedQuestion[] = [];
+  quest: quest | null = null;
+  loading = true; // Track loading state
 
   constructor(
     private dialog: MatDialog,
@@ -60,8 +64,23 @@ export class QuestionBankComponent implements OnInit {
   getQuestions() {
     this.questionService.getQuestions().subscribe(questions => {
       this.questions = questions;
+      this.filteredQuestions = questions;
+      this.loading = false; // Stop loading once data is fetched
+    }, () => {
+      this.loading = false; // Ensure loading stops on error
     });
   }
+
+  filterQuestions(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      const searchTerm = target.value.trim().toLowerCase();
+      this.filteredQuestions = this.questions.filter(q =>
+        q.questionText.toLowerCase().includes(searchTerm)
+      );
+    }
+  }
+  
 
   openEditQuestionDialog(question: SubmittedQuestion) {
     this.dialog.open(EditQuestionDialogComponent, {
