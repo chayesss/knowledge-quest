@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,48 +7,75 @@ import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuestService } from '../shared/services/quest.service';
 import { quest } from '../shared/models/quest.model';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-quest-start',
   standalone: true,
-  imports: [MatCardModule, MatListModule, MatFormFieldModule, MatIconModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    RouterModule,
+    MatDividerModule],
   templateUrl: './quest-start.component.html',
   styleUrl: './quest-start.component.scss'
 })
 export class QuestStartComponent {
-  teamForm: FormGroup
-  teams: string[] = []
   quest: quest | null = null;
+  teamsForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private questService: QuestService,
+    private formBuilder: FormBuilder,
   ) {
+    this.teamsForm = this.formBuilder.group({
+      teams: this.formBuilder.array([])
+    });
     this.route.params.subscribe(params => {
       this.questService.getQuestById(params['id']).subscribe(quest => {
         this.quest = quest;
       });
     });
-    this.teamForm = this.fb.group({
-      teamName: ["", Validators.required],
-    })
+  }
+
+  ngOnInit() {
+    this.addTeam();
+    this.addTeam();
+  }
+
+  get teams() {
+    return this.teamsForm.get('teams') as FormArray;
   }
 
   addTeam() {
-    if (this.teamForm.valid) {
-      const teamName = this.teamForm.get("teamName")?.value
-      this.teams.push(teamName)
-      this.teamForm.reset()
-    }
+    const newTeamGroup = this.formBuilder.group({
+      text: ['', Validators.required],
+    });
+    this.teams.push(newTeamGroup);
   }
 
   removeTeam(index: number) {
-    this.teams.splice(index, 1)
+    this.teams.removeAt(index);
   }
 
   startQuest() {
     // Implement the logic to start the quest
-    console.log("Starting quest with teams:", this.teams)
   }
 }
