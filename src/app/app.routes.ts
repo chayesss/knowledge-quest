@@ -6,6 +6,7 @@ import { QuestionBankComponent } from './question-bank/question-bank.component';
 import { AuthGuard } from './auth.guard';
 import { AddQuestionToQuestComponent } from './question-bank/add-question-to-quest/add-question-to-quest.component';
 import { PreviewQuestComponent } from './preview-quest/preview-quest.component';
+import { QuestStartComponent } from './quest-start/quest-start.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },  // Redirect root path to /dashboard
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'question-bank', component: QuestionBankComponent },
     { path: 'quest/add-questions/:id', component: AddQuestionToQuestComponent },
-    { path: 'quest/preview/:id', component: PreviewQuestComponent }
+    { path: 'quest/preview/:id', component: PreviewQuestComponent },
+    { path: 'quest/start/:id', component: QuestStartComponent }
 ];

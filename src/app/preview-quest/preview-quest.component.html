@@ -12,7 +12,9 @@
       <mat-chip color="primary" selected>{{ quest?.questSubject }}</mat-chip>
     </mat-card-content>
   </mat-card>
-
+  <button mat-raised-button color="primary" (click)="startQuest()" [disabled]="quest?.questions?.length === 0">
+    Start the Quest
+  </button>
   <mat-tab-group (selectedTabChange)="onTabChange($event)">
     <mat-tab label="Preview Questions">
       <ng-container *ngIf="quest; else loading">
@@ -29,7 +31,6 @@
         </ng-template>
       </ng-container>
     </mat-tab>
-
     <mat-tab label="Manage Questions">
       <ng-container *ngIf="quest; else loading">
         <div *ngIf="quest?.questions?.length === 0; else manageQuestions">
