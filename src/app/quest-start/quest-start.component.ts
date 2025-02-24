@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuestService } from '../shared/services/quest.service';
-import { quest } from '../shared/models/quest.model';
+import { Quest } from '../shared/models/quest.model';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,7 +36,7 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './quest-start.component.scss'
 })
 export class QuestStartComponent {
-  quest: quest | null = null;
+  quest: Quest | null = null;
   teamsForm: FormGroup;
 
   constructor(
@@ -76,6 +76,13 @@ export class QuestStartComponent {
   }
 
   startQuest() {
-    // Implement the logic to start the quest
+    const teams = this.teamsForm.value.teams.map((team: any) => {
+      return { name: team.text, points: 0 };
+    });
+    this.questService.startQuest(this.quest!.id!, teams).subscribe(() => {
+      console.log('Quest started');
+      // Route to quest play component
+    });
+
   }
 }

@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QuestService } from '../../shared/services/quest.service';
-import { quest } from '../../shared/models/quest.model';
+import { Quest } from '../../shared/models/quest.model';
 import { QuestionsComponent } from "../questions/questions.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SubmittedQuestion } from '../../shared/models/question.model';
@@ -26,10 +26,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './add-question-to-quest.component.scss'
 })
 export class AddQuestionToQuestComponent implements OnInit {
-  quest: quest | null = null;
+  quest: Quest | null = null;
   allQuestions: SubmittedQuestion[] = []; // Store all questions
   filteredQuestions: SubmittedQuestion[] = []; // Store filtered questions
-  
+
   constructor(
     private route: ActivatedRoute,
     private questService: QuestService,
@@ -49,7 +49,7 @@ export class AddQuestionToQuestComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   // Method to filter questions based on the input text
   filterQuestions(event: Event): void {

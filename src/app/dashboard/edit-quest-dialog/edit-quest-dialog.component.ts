@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { QuestService } from '../../shared/services/quest.service';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef  } from '@angular/material/dialog';
-import { quest } from '../../shared/models/quest.model';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Quest } from '../../shared/models/quest.model';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -45,8 +45,8 @@ export class EditQuestDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {
       questName: any;
       questDescription: any;
-      questSubject: any; id: string, questData: quest 
-  }
+      questSubject: any; id: string, questData: Quest
+    }
   ) {
     this.editQuestForm = this.formBuilder.group({
       questName: ['', Validators.required],
@@ -70,7 +70,7 @@ export class EditQuestDialogComponent implements OnInit {
     if (this.editQuestForm.valid) {
       this.questService.updateQuest(this.data.id, this.editQuestForm.value).subscribe(() => {
         this.snackBar.open('Quest updated successfully!', 'Close', { duration: 3000 });
-        this.dialogRef.close(true); 
+        this.dialogRef.close(true);
       }, (error) => {
         this.snackBar.open(`Error: ${error.message}`, 'Close', { duration: 3000 });
       });
@@ -79,7 +79,7 @@ export class EditQuestDialogComponent implements OnInit {
   onAddQuestion() {
     this.dialogRef.close(true);
     this.router.navigate(['/quest/add-questions/', this.data.id], {
-      state: {quest: this.data}
+      state: { quest: this.data }
     })
   }
 }

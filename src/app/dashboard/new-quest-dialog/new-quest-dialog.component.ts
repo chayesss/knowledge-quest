@@ -12,7 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { QuestService } from '../../shared/services/quest.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
-import { quest } from '../../shared/models/quest.model';
+import { Quest } from '../../shared/models/quest.model';
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from 'firebase/auth';
 
@@ -62,7 +62,7 @@ export class QuestDialogComponent {
 
   submitQuest() {
     if (this.QuestForm.valid) {
-      var quest: quest = {
+      var quest: Quest = {
         questName: this.QuestForm.value.questName,
         questDescription: this.QuestForm.value.questDescription,
         questSubject: this.QuestForm.value.questSubject,

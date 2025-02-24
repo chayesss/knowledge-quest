@@ -11,7 +11,7 @@ import { QuestDialogComponent } from './new-quest-dialog/new-quest-dialog.compon
 import { EditQuestDialogComponent } from './edit-quest-dialog/edit-quest-dialog.component';
 import { QuestService } from '../shared/services/quest.service';
 import { AuthService } from '../shared/services/auth.service';
-import { quest } from '../shared/models/quest.model';
+import { Quest } from '../shared/models/quest.model';
 import { User } from 'firebase/auth';
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 
@@ -33,8 +33,8 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 })
 export class DashboardComponent {
   title: string = 'knowledge-quest';
-  quests: quest[] = [];
-  filteredQuests: quest[] = []; // List for displaying filtered quests
+  quests: Quest[] = [];
+  filteredQuests: Quest[] = []; // List for displaying filtered quests
   searchTerm: string = '';
   user: User | undefined;
 
@@ -52,13 +52,13 @@ export class DashboardComponent {
   }
 
   ngOnInit(): void {
-    this.questService.getQuest().subscribe((data: quest[]) => {
+    this.questService.getQuest().subscribe((data: Quest[]) => {
       this.quests = data;
       this.filteredQuests = data; // Initialize filtered list
     });
   }
 
-  trackByIndex(index: number, quest: quest): number {
+  trackByIndex(index: number, quest: Quest): number {
     return index;
   }
 
@@ -78,7 +78,7 @@ export class DashboardComponent {
     });
   }
 
-  openEditQuestDialog(quest: quest): void {
+  openEditQuestDialog(quest: Quest): void {
     this.dialog.open(EditQuestDialogComponent, {
       minWidth: '700px',
       height: '550px',
