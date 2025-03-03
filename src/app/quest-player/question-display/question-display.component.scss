@@ -1,0 +1,48 @@
+.question-card {
+  width: 100%;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.option-item {
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.option-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.correct-option {
+  border-color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.08);
+}
+
+.explanation-container {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: rgba(33, 150, 243, 0.08);
+  border-radius: 4px;
+}
+
+.explanation-title {
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.explanation-text {
+  margin: 0;
+}
+
+.check-icon {
+  color: green;
+}

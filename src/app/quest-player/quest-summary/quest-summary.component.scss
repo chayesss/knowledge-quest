@@ -1,0 +1,85 @@
+.summary-card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.winner-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.trophy-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(255, 193, 7, 0.1);
+  margin-bottom: 16px;
+}
+
+.trophy-icon mat-icon {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+  color: #ffc107;
+}
+
+.winner-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.winner-subtitle {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.scores-section {
+  margin-top: 32px;
+}
+
+.scores-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.score-item {
+  height: auto !important;
+  margin-bottom: 8px;
+}
+
+.score-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
+.score-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.team-name {
+  font-weight: 500;
+}
+
+.team-points {
+  font-weight: 700;
+}
+
+.winner-item .score-content {
+  border-color: #ffc107;
+  background-color: rgba(255, 193, 7, 0.08);
+}

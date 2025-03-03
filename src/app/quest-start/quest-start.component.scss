@@ -1,0 +1,43 @@
+.container {
+  margin-top: 8rem;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.page-header {
+  text-align: center;
+}
+
+.add-team {
+  width: 100%;
+}
+
+.add-team-button {
+  width: 100%;
+} 
+
+.main-content {
+  margin: 0 auto;
+  width: 800px;
+}
+
+.start-button-container {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.start-quest-button {
+  width: 500px;
+}
+
+.header {
+  width: 50%;
+}
+
+.teams-container {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}

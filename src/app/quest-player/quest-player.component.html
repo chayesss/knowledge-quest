@@ -1,0 +1,32 @@
+<div class="quest-player-full-container">
+  <div *ngIf="quest && !gameCompleted" class="quest-container">
+    <div class="quest-header">
+      <div>
+        <h2 class="quest-title">{{ quest.questName }}</h2>
+        <p class="quest-progress-text">Question {{ currentQuestionIndex + 1 }} of {{ quest.questions.length }}</p>
+      </div>
+    </div>
+  
+    <mat-progress-bar [value]="progress" color="primary" class="quest-progress">
+    </mat-progress-bar>
+  
+    <app-question-display [question]="currentQuestion" [isAnswerRevealed]="isAnswerRevealed"
+      (revealAnswer)="revealAnswer()">
+    </app-question-display>
+  
+    <div *ngIf="isAnswerRevealed" class="scoring-section">
+      <app-team-scoreboard [teams]="teams" (awardPoints)="awardPointsToTeam($event.teamIndex, $event.points)">
+      </app-team-scoreboard>
+  
+      <div class="next-button-container">
+        <button mat-raised-button color="primary" (click)="nextQuestion()">
+          {{ isLastQuestion ? 'Finish Quest' : 'Next Question' }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <app-quest-summary *ngIf="gameCompleted" [teams]="teams" [questName]="quest.questName" (restart)="restartGame()">
+  </app-quest-summary>
+</div>
+

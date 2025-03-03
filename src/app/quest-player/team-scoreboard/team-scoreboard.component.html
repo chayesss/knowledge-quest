@@ -1,0 +1,22 @@
+<mat-card class="scoreboard-card">
+  <mat-card-header>
+    <mat-card-title>Award Points</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="teams-container">
+      <div *ngFor="let team of teams; let i = index" class="team-item">
+        <div class="team-info">
+          <span class="team-name">Team {{ team.name }}</span>
+          <mat-chip-set>
+            <mat-chip>{{ team.points }} points</mat-chip>
+          </mat-chip-set>
+        </div>
+        <div class="team-actions">
+          <button mat-stroked-button (click)="onAwardPoints(i, 1)">
+            <mat-icon>add_circle</mat-icon> +1 
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

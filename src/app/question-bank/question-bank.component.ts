@@ -13,7 +13,7 @@ import { User } from 'firebase/auth';
 import { AuthService } from '../shared/services/auth.service';
 import { QuestionsComponent } from "./questions/questions.component";
 import { QuestionService } from '../shared/services/question.service';
-import { quest } from '../shared/models/quest.model';
+import { Quest } from '../shared/models/quest.model';
 import { QuestService } from '../shared/services/quest.service';
 import { SubmittedQuestion } from '../shared/models/question.model';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -41,7 +41,7 @@ export class QuestionBankComponent implements OnInit {
   user!: User | null;
   questions: SubmittedQuestion[] = [];
   filteredQuestions: SubmittedQuestion[] = [];
-  quest: quest | null = null;
+  quest: Quest | null = null;
   loading = true; // Track loading state
 
   constructor(
@@ -50,7 +50,7 @@ export class QuestionBankComponent implements OnInit {
     private questionService: QuestionService,
     private questService: QuestService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(user => {
@@ -80,7 +80,7 @@ export class QuestionBankComponent implements OnInit {
       );
     }
   }
-  
+
 
   openEditQuestionDialog(question: SubmittedQuestion) {
     this.dialog.open(EditQuestionDialogComponent, {
