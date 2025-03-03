@@ -65,7 +65,7 @@ export class QuestService {
     return from(docRef);
   }
   
-  removeQuestionFromQuest(quest: quest, question: SubmittedQuestion) { 
+  removeQuestionFromQuest(quest: Quest, question: SubmittedQuestion) { 
     // Filter out the removed question
     quest.questions = quest.questions.filter(q => q.questionText !== question.questionText);
     
