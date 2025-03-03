@@ -25,4 +25,5 @@ export class QuestionService {
     const questionsCollection = collection(this.firestore, 'submittedQuestions');
     return from(collectionData(questionsCollection, { idField: 'id' }));
   }
+  
 }

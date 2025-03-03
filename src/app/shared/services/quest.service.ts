@@ -64,6 +64,13 @@ export class QuestService {
     var docRef = addDoc(collection(this.firestore, 'completedQuests'), completedQuest).then(docRef => { const completedQuestId = docRef.id as string; return completedQuestId });
     return from(docRef);
   }
-
-
+  
+  removeQuestionFromQuest(quest: quest, question: SubmittedQuestion) { 
+    // Filter out the removed question
+    quest.questions = quest.questions.filter(q => q.questionText !== question.questionText);
+    
+    const questDocRef = doc(this.firestore, `submittedNewQuest/${quest.id}`);
+    return from(updateDoc(questDocRef, { questions: [...quest.questions] }));
+  }
+  
 }

@@ -62,21 +62,39 @@ export class AddQuestionToQuestComponent implements OnInit {
     }
   }
 
-  // Add question to the quest by calling the existing method
+  
   addQuestionToQuest(question: SubmittedQuestion): void {
-    if (this.quest) {
-      this.questService.addQuestionToQuest(this.quest, question).subscribe({
-        next: () => {
-          this.snackBar.open('Question added to quest!', '', { duration: 3000 });
-        },
-        error: (err: any) => {
-          this.snackBar.open('Failed to add question to quest ' + err, '', { duration: 3000 });
-        }
-      });
+    if (!this.quest || !this.quest.id) {
+      console.error('Quest or Quest ID is missing');
+      return;
     }
+  
+    console.log('Adding question to quest:', question); // Debugging log
+  
+    this.questService.addQuestionToQuest(this.quest, question).subscribe({
+      next: () => {
+        // No need to push the question manually here, it is already done in the service
+        console.log('Updated quest questions:', this.quest!.questions); // Debugging log
+        this.snackBar.open('Question added to quest!', '', { duration: 3000 });
+      },
+      error: (err: any) => {
+        console.error('Error adding question:', err);
+        this.snackBar.open('Failed to add question to quest: ' + err, '', { duration: 3000 });
+      }
+    });
+  }
+  
+
+  
+  onAddToQuest(question: SubmittedQuestion): void {
+    this.addQuestionToQuest(question);  
   }
 
-  onAddToQuest(question: SubmittedQuestion): void {
-    this.addQuestionToQuest(question);  // Reuse the method here
+  removeQuestionFromQuest(question: SubmittedQuestion) {
+    console.log('Received event to remove question:', question); 
+    this.questService.removeQuestionFromQuest(this.quest!, question).subscribe(() => {
+      console.log('Question removed successfully');
+    });
   }
+  
 }
