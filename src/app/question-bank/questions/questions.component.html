@@ -26,9 +26,11 @@
 
           <button *ngIf="!questionsEditable" 
               mat-button class="card-action-btn"
-              (click)="addQuestionToQuest.emit(question)">
-              Add Question
+              (click)="handleQuestionToggle(question)">
+              {{ isQuestionInQuest(question) ? 'Remove from Quest' : 'Add to Quest' }}
           </button>
+      
+      
 
         </mat-card>
       </mat-grid-tile>

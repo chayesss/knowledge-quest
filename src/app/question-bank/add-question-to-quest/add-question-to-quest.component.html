@@ -17,7 +17,8 @@
     [quest]="quest" 
     [questions]="filteredQuestions"
     [questionsEditable]="false"
-    (addQuestionToQuest)="onAddToQuest($event)">
+    (addQuestionToQuest)="onAddToQuest($event)"
+    (removeQuestionFromQuestEvent)="removeQuestionFromQuest($event)">
   </app-questions>
 </div>
 

@@ -34,14 +34,40 @@ export class QuestionsComponent {
   @Input() questionsEditable: boolean = true; 
   @Output() editQuestion = new EventEmitter<SubmittedQuestion>();
   @Output() addQuestionToQuest = new EventEmitter<SubmittedQuestion>();
-  @Input() hideAnswers: boolean = false;  // New input to control hiding answers
+  @Input() hideAnswers: boolean = false;  
+  @Output() removeQuestionFromQuestEvent = new EventEmitter<SubmittedQuestion>();
 
-
-  openEditDialog(question: SubmittedQuestion) {
-    this.editQuestion.emit(question);
+  isQuestionInQuest(question: SubmittedQuestion): boolean {
+    return this.quest?.questions?.some(q => q.questionText === question.questionText) ?? false;
   }
+
+  toggleQuestionInQuest(question: SubmittedQuestion) {
+    if (this.isQuestionInQuest(question)) {
+      this.removeQuestionFromQuest(question);
+    } else {
+      this.addToQuest(question);
+    }
+  }
+
+  handleQuestionToggle(question: SubmittedQuestion) {
+    console.log('Button clicked for question:', question);
+  
+    if (this.isQuestionInQuest(question)) {
+      console.log('Removing question:', question);
+      this.removeQuestionFromQuest(question);
+    } else {
+      console.log('Adding question:', question);
+      this.addToQuest(question);
+    }
+  }
+  
 
   addToQuest(question: SubmittedQuestion) {
     this.addQuestionToQuest.emit(question);
   }
+
+  removeQuestionFromQuest(question: SubmittedQuestion) {
+    this.removeQuestionFromQuestEvent.emit(question);
+  }
+  
 }

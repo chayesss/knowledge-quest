@@ -109,4 +109,12 @@ export class QuestionBankComponent implements OnInit {
       });
     }
   }
+
+  removeQuestionFromQuest(question: SubmittedQuestion) {
+    console.log('Received event to remove question:', question);
+    this.questService.removeQuestionFromQuest(this.quest!, question).subscribe(() => {
+      console.log('Question removed successfully');
+    });
+  }
+  
 }
