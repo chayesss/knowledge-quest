@@ -1,0 +1,35 @@
+<mat-card class="summary-card">
+  <mat-card-header>
+    <mat-card-title>Quest Complete!</mat-card-title>
+    <mat-card-subtitle>{{ questName }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="winner-section">
+      <div class="trophy-icon">
+        <mat-icon>emoji_events</mat-icon>
+      </div>
+      <h3 class="winner-title">
+        {{ isMultipleWinners ? "It's a tie!" : "Team " + winners[0]?.name + " wins!" }}
+      </h3>
+    </div>
+
+    <div class="scores-section">
+      <h3 class="scores-title">Final Scores</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let team of sortedTeams; let i = index" class="score-item"
+          [class.winner-item]="isWinner(team)">
+          <div class="score-content">
+            <div class="score-info">
+              <mat-icon *ngIf="i === 0 && isWinner(team)" color="accent">emoji_events</mat-icon>
+              <span class="team-name">Team {{ team.name }}</span>
+            </div>
+            <span class="team-points">{{ team.points }} points</span>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="onRestart()">Play Again</button>
+  </mat-card-actions>
+</mat-card>

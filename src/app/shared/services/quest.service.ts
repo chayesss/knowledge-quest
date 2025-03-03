@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, doc, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
-import { Quest } from '../models/quest.model';
-import { from, Observable } from 'rxjs';
+import { CompletedQuest, Quest } from '../models/quest.model';
+import { from, map, Observable } from 'rxjs';
 import { SubmittedQuestion } from '../models/question.model';
 import { Team } from '../models/team.model';
 
@@ -35,6 +35,16 @@ export class QuestService {
     return from(data);
   }
 
+  getCompletedQuestById(id: string): Observable<CompletedQuest> {
+    const questDocRef = doc(this.firestore, `completedQuests/${id}`);
+    const data = getDoc(questDocRef).then(doc => {
+      const questData = doc.data() as CompletedQuest;
+      questData.id = doc.id;
+      return questData;
+    });
+    return from(data);
+  }
+
   updateQuest(id: string, updatedQuest: Partial<Quest>) {
     const questDocRef = doc(this.firestore, `submittedNewQuest/${id}`);
     return from(updateDoc(questDocRef, { ...updatedQuest }));
@@ -47,10 +57,13 @@ export class QuestService {
   }
 
   startQuest(questId: string, teams: Team[]) {
-    const completedQuest = {
-      questId,
-      teams,
+    const completedQuest: CompletedQuest = {
+      questId: questId,
+      teams: teams,
     }
-    return from(addDoc(collection(this.firestore, 'completedQuests'), completedQuest));
+    var docRef = addDoc(collection(this.firestore, 'completedQuests'), completedQuest).then(docRef => { const completedQuestId = docRef.id as string; return completedQuestId });
+    return from(docRef);
   }
+
+
 }

@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestService } from '../shared/services/quest.service';
 import { Quest } from '../shared/models/quest.model';
 import { CommonModule } from '@angular/common';
@@ -30,7 +30,6 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCheckboxModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    RouterModule,
     MatDividerModule],
   templateUrl: './quest-start.component.html',
   styleUrl: './quest-start.component.scss'
@@ -44,6 +43,7 @@ export class QuestStartComponent {
     private route: ActivatedRoute,
     private questService: QuestService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.teamsForm = this.formBuilder.group({
       teams: this.formBuilder.array([])
@@ -79,9 +79,11 @@ export class QuestStartComponent {
     const teams = this.teamsForm.value.teams.map((team: any) => {
       return { name: team.text, points: 0 };
     });
-    this.questService.startQuest(this.quest!.id!, teams).subscribe(() => {
-      console.log('Quest started');
-      // Route to quest play component
+    this.questService.startQuest(this.quest!.id!, teams).subscribe((data) => {
+      console.log(data)
+      this.router.navigate(['/quest/play/', data], {
+        state: { quest: data }
+      });
     });
 
   }
