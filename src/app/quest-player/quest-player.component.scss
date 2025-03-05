@@ -1,0 +1,52 @@
+.quest-card {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.quest-info {
+  margin: 16px 0;
+}
+
+.quest-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.quest-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.quest-progress-text {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 4px 0 0 0;
+}
+
+.quest-progress {
+  margin-bottom: 16px;
+}
+
+.scoring-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.next-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.quest-player-full-container {
+  width: 100%;
+  padding-top: 4rem;
+}

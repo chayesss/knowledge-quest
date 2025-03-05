@@ -1,6 +1,7 @@
 import { SubmittedQuestion } from "./question.model";
+import { Team } from "./team.model";
 
-export interface quest {
+export interface Quest {
     id?: string;
     questName: string,
     questDescription: string,
@@ -8,4 +9,11 @@ export interface quest {
     createdBy: string,
     createdOn: Date,
     questions: SubmittedQuestion[]
+}
+
+export interface CompletedQuest {
+    id?: string,
+    questId: string,
+    teams: Team[],
+    completedOn?: Date,
 }

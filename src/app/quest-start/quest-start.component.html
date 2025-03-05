@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h1>Get ready to begin your Quest!</h1>
+</div>
+<div class="main-content">
+  <div class="container">
+    <div class="header">
+      <h1>{{quest?.questName}}</h1>
+      <p>{{quest?.questSubject}}</p>
+      <p>{{quest?.questDescription}}</p>
+      <p>{{quest?.questions?.length}} total questions</p>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="teams-container">
+      <div>
+        <h2>Set Up Your Teams</h2>
+        <form [formGroup]="teamsForm">
+          <div formArrayName="teams">
+            <div *ngFor="let team of teams.controls; let i = index">
+              <div [formGroupName]="i" class="team-row">
+                <mat-form-field appearance="outline" class="team-input">
+                  <mat-label>Team {{ i + 1 }}</mat-label>
+                  <input matInput [formControlName]="'text'" placeholder="Enter team {{ i + 1 }}">
+                </mat-form-field>
+                <button mat-icon-button color="warn" [disabled]="teams.length < 3" (click)="removeTeam(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="add-team">
+          <button mat-stroked-button type="button" class="add-team-button" (click)="addTeam()" >
+            <mat-icon fontIcon="add"></mat-icon> Add Team
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="start-button-container">
+    <button class="start-quest-button" mat-raised-button color="primary" (click)="startQuest()" [disabled]="teamsForm.invalid">
+      Start the Quest
+    </button>
+  </div>
+</div>

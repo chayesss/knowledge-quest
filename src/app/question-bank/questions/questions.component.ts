@@ -9,7 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { User } from 'firebase/auth';
 import { SubmittedQuestion } from '../../shared/models/question.model';
-import { quest } from '../../shared/models/quest.model';
+import { Quest } from '../../shared/models/quest.model';
 
 @Component({
   selector: 'app-questions',
@@ -30,8 +30,8 @@ import { quest } from '../../shared/models/quest.model';
 export class QuestionsComponent {
   @Input() user!: User | null;
   @Input() questions: SubmittedQuestion[] = [];
-  @Input() quest: quest | null = null;
-  @Input() questionsEditable: boolean = true; 
+  @Input() quest: Quest | null = null;
+  @Input() questionsEditable: boolean = true;
   @Output() editQuestion = new EventEmitter<SubmittedQuestion>();
   @Output() addQuestionToQuest = new EventEmitter<SubmittedQuestion>();
   @Input() hideAnswers: boolean = false;  

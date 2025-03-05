@@ -6,9 +6,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { QuestService } from '../shared/services/quest.service';
-import { quest } from '../shared/models/quest.model';
+import { Quest } from '../shared/models/quest.model';
 import { QuestionsComponent } from "../question-bank/questions/questions.component";
 import { MatDialog } from '@angular/material/dialog';
 import { EditQuestDialogComponent } from '../dashboard/edit-quest-dialog/edit-quest-dialog.component';
@@ -25,7 +25,7 @@ import { SubmittedQuestion } from '../shared/models/question.model';
   styleUrls: ['./preview-quest.component.scss']
 })
 export class PreviewQuestComponent implements OnInit {
-  quest: quest | null = null;
+  quest: Quest | null = null;
   allQuestions: SubmittedQuestion[] = [];
   isLoading = true;  // Add a loading state
   error: string | null = null;  // Handle error message
@@ -34,8 +34,9 @@ export class PreviewQuestComponent implements OnInit {
     private route: ActivatedRoute,
     private questService: QuestService,
     private dialog: MatDialog,
-    private questionService: QuestionService
-  ) {}
+    private questionService: QuestionService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -71,5 +72,11 @@ export class PreviewQuestComponent implements OnInit {
 
   onTabChange($event: MatTabChangeEvent) {
     // Handle tab changes if needed
+  }
+
+  startQuest() {
+    this.router.navigate(['/quest/start/', this.quest?.id], {
+      state: { quest: this.quest?.id }
+    });
   }
 }
