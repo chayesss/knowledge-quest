@@ -70,9 +70,6 @@ export class PreviewQuestComponent implements OnInit {
     });
   }
 
-  onTabChange($event: MatTabChangeEvent) {
-    // Handle tab changes if needed
-  }
 
   startQuest() {
     this.router.navigate(['/quest/start/', this.quest?.id], {

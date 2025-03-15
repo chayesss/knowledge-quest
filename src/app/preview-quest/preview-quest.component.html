@@ -4,9 +4,10 @@
       <mat-card-title>{{ quest?.questName }}</mat-card-title>
       <mat-card-subtitle>{{ quest?.questDescription }}</mat-card-subtitle>
       <span class="spacer"></span>
-      <button mat-icon-button (click)="openEditQuestDialog(quest)">
+      <button mat-stroked-button (click)="openEditQuestDialog(quest)">
         <mat-icon>edit</mat-icon>
-      </button>
+        Edit Quest / Questions
+      </button>      
     </mat-card-header>
     <mat-card-content>
       <mat-chip color="primary" selected>{{ quest?.questSubject }}</mat-chip>
@@ -15,7 +16,7 @@
   <button mat-raised-button color="primary" (click)="startQuest()" [disabled]="quest?.questions?.length === 0">
     Start the Quest
   </button>
-  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+  <mat-tab-group>
     <mat-tab label="Preview Questions">
       <ng-container *ngIf="quest; else loading">
         <!-- Check if there are questions associated with the quest -->
@@ -28,21 +29,6 @@
                           [questions]="quest?.questions || []" 
                           [questionsEditable]="true" 
                           [hideAnswers]="true"></app-questions>
-        </ng-template>
-      </ng-container>
-    </mat-tab>
-    <mat-tab label="Manage Questions">
-      <ng-container *ngIf="quest; else loading">
-        <div *ngIf="quest?.questions?.length === 0; else manageQuestions">
-          <p>No questions have been assigned to this quest.</p>
-        </div>
-
-        <ng-template #manageQuestions>
-          <app-questions 
-            [quest]="quest"    
-            [questions]="quest?.questions || []" 
-            [questionsEditable]="false">
-          </app-questions>
         </ng-template>
       </ng-container>
     </mat-tab>
