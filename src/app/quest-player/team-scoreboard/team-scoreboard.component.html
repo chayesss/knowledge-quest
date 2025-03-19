@@ -8,12 +8,15 @@
         <div class="team-info">
           <span class="team-name">Team {{ team.name }}</span>
           <mat-chip-set>
-            <mat-chip>{{ team.points }} points</mat-chip>
+            <mat-chip>{{ team.points ?? 0 }} points</mat-chip>
           </mat-chip-set>
         </div>
         <div class="team-actions">
+          <button *ngIf="(team.points ?? 0) > 0" mat-stroked-button color="warn" (click)="onAwardPoints(i, -1)">
+            <mat-icon>remove_circle</mat-icon> -1
+          </button>
           <button mat-stroked-button (click)="onAwardPoints(i, 1)">
-            <mat-icon>add_circle</mat-icon> +1 
+            <mat-icon>add_circle</mat-icon> +1
           </button>
         </div>
       </div>
