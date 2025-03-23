@@ -5,28 +5,13 @@
     <mat-form-field class="search-field">
       <input matInput placeholder="Search for Quests" [(ngModel)]="searchTerm" (input)="filterQuests()">
     </mat-form-field>
-    <button mat-flat-button (click)="openQuestDialog()">Create Quest</button>
+    <button mat-flat-button (click)="openQuestDialog()" color="accent">Create Quest</button>
   </div>
 
-  <div *ngIf="filteredQuests.length > 0; else noResults">
-    <mat-grid-list cols="3" class="grid-container">
-      <mat-grid-tile *ngFor="let quest of filteredQuests; let i = index; trackBy: trackByIndex">
-        <mat-card appearance="outlined">
-          <mat-card-header>
-            <mat-card-title>{{ quest.questName }}</mat-card-title>
-            <mat-card-subtitle>{{ quest.questSubject }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            {{ quest.questDescription }}
-          </mat-card-content>
-          <mat-card-actions>
-            <div>
-              <button mat-flat-button (click)="quest.id ? previewQuest(quest.id) : null">Preview Quest</button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+  <div class="quests-container" *ngIf="filteredQuests.length > 0; else noResults">
+      <div *ngFor="let quest of filteredQuests; let i = index; trackBy: trackByIndex">
+        <app-quest-card [quest]="quest" [canPreview]="true" ></app-quest-card>
+      </div>
   </div>
 
   <ng-template #noResults>

@@ -22,7 +22,7 @@
           <div class="carousel-cards" [style.width.%]="quests.length * 100">
             <ng-container *ngFor="let repeat of [0, 1]">
               <div *ngFor="let quest of quests">
-                <app-quest-card [quest]="quest"></app-quest-card>
+                <app-quest-card [canPreview]="false" [quest]="quest"></app-quest-card>
               </div>
             </ng-container>
           </div>

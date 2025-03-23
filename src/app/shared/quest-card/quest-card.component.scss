@@ -1,6 +1,6 @@
 .quest-card {
   flex: 1;
-  min-width: 300px;
+  min-width: 350px;
   max-width: 350px;
 }
 
@@ -35,4 +35,9 @@ mat-card-actions {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px 16px;
+}
+
+.questions-count {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
 }

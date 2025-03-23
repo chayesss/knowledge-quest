@@ -82,9 +82,11 @@ export class LandingPageComponent implements AfterViewInit, OnDestroy {
     const scrollAmount = 1;
     const delay = 5;
 
+    var loopWidth = 374 * this.quests.length;
+
     this.scrollInterval = setInterval(() => {
       carousel.scrollLeft += scrollAmount;
-      if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+      if (carousel.scrollLeft >= loopWidth) {
         carousel.scrollLeft = 0;
       }
     }, delay);

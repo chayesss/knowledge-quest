@@ -11,6 +11,6 @@
   </mat-card-content>
   <mat-card-actions>
     <span class="questions-count">{{ quest!.questions.length }} questions</span>
-    <button mat-stroked-button color="accent">View Quest</button>
+    <button mat-stroked-button *ngIf="canPreview" color="accent" (click)="previewQuest(quest!.id!)">View Quest</button>
   </mat-card-actions>
 </mat-card>
