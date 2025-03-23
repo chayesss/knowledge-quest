@@ -2,24 +2,38 @@
 <div class="center-spinner"><mat-spinner></mat-spinner></div>
 } @else {
 <div>
-  <mat-toolbar class="app-bar">
-    <span>Knowledge Quest</span>
+  <mat-toolbar class="app-bar" color="primary">
+    <div class="logo">
+      <mat-icon>school</mat-icon>
+      <span>Knowledge Quest</span>
+    </div>
     <span class="appbar-spacer"></span>
-    <button mat-button [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</button>
-    <button mat-button [routerLink]="['/question-bank']" routerLinkActive="router-link-active">Question Bank</button>
-    @if (user) {
-    <div>User: {{user.email}}</div>
-
-    <button mat-button (click)="logout()">Log out</button>
-    }
-    @else {
-    <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active">Log in</button>
-    }
+    <div class="nav-links">
+      <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</a>
+      <a [routerLink]="['/question-bank']" routerLinkActive="router-link-active">Question Bank</a>
+      @if (user) {
+      <div>User: {{user.email}}</div>
+      <button mat-button (click)="logout()">Log out</button>
+      }
+      @else {
+      <button mat-raised-button color="accent" [routerLink]="['/login']" routerLinkActive="router-link-active">Log in</button>
+      }
+    </div>
   </mat-toolbar>
+  <div class="app-bar-accent" color="accent">
+  </div>
   <div class="app-container">
     <router-outlet />
   </div>
-</div>
+    <footer>
+      <div class="container">
+          <p>&copy; {{ currentYear }} Knowledge Quest. University of Cincinnati IT EXPO</p>
+          <div>
+            <a href="https://github.com/chayesss/knowledge-quest" target="_blank" class="footer-link"><mat-icon>code</mat-icon> Code Repository</a>
+          </div>
+        </div>
+      </footer>
+  </div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 }

@@ -1,0 +1,100 @@
+<div class="app-container">
+
+
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Learning, One Quest At A Time</h1>
+          <p>Create interactive educational games that make learning fun and engaging for students of all ages.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="carousel-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Explore Quests</h2>
+          <p>See interactive quests created by individuals around the world.</p>
+        </div>
+
+        <div class="carousel-container">
+          <button mat-mini-fab color="basic" class="carousel-nav prev-btn" (click)="prevSlide()">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+
+          <div class="carousel-cards">
+            <mat-card class="quest-card" *ngFor="let quest of visibleQuests">
+              <mat-card-header class="card-header">
+                <mat-card-title>{{ quest.questName }}</mat-card-title>
+                <div></div>
+                <mat-chip-set>
+                  <mat-chip color="accent" highlighted>{{ quest.questSubject }}</mat-chip>
+                </mat-chip-set>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="quest-description">{{ quest.questDescription }}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <span class="questions-count">{{ quest.questions.length }} questions</span>
+                <button mat-stroked-button color="accent">View Quest</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <button mat-mini-fab color="basic" class="carousel-nav next-btn" (click)="nextSlide()">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+
+        <div class="carousel-indicators">
+          <button
+            *ngFor="let quest of quests; let i = index"
+            class="indicator-dot"
+            [class.active]="currentIndex === i"
+            (click)="goToSlide(i)">
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <mat-icon>menu_book</mat-icon>
+            </div>
+            <h3>Create Custom Quests</h3>
+            <p>Design interactive learning experiences tailored to your curriculum and student needs.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <mat-icon>question_mark</mat-icon>
+            </div>
+            <h3>Submit Questions</h3>
+            <p>Create questions for users all around the world to use in their own quests.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <mat-icon>groups</mat-icon>
+            </div>
+            <h3>Learn Together</h3>
+            <p>Form teams to compete against your peers! Earn points by answering questions. The team with the most points wins!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Start Your Quest?</h2>
+        <p>Join thousands of educators who are transforming the way students learn.</p>
+        <button mat-raised-button color="accent" class="signup-cta-btn" [routerLink]="['/signup']" routerLinkActive="router-link-active">Sign Up Now</button>
+      </div>
+    </section>
+  </main>
+

@@ -19,6 +19,7 @@ import { User } from 'firebase/auth';
 export class AppComponent implements OnInit {
   user: User | undefined;
   loadingUser: boolean = false;
+  currentYear = new Date().getFullYear()
 
 
   constructor(
