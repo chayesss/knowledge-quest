@@ -1,0 +1,16 @@
+<mat-card class="quest-card" >
+  <mat-card-header class="card-header">
+    <mat-card-title>{{ quest!.questName }}</mat-card-title>
+    <div></div>
+    <mat-chip-set>
+      <mat-chip color="accent" highlighted>{{ quest!.questSubject }}</mat-chip>
+    </mat-chip-set>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="quest-description">{{ quest!.questDescription }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <span class="questions-count">{{ quest!.questions.length }} questions</span>
+    <button mat-stroked-button color="accent">View Quest</button>
+  </mat-card-actions>
+</mat-card>

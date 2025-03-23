@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Quest } from '../shared/models/quest.model';
 import { RouterModule } from '@angular/router';
+import { QuestCardComponent } from '../shared/quest-card/quest-card.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -21,11 +22,12 @@ import { RouterModule } from '@angular/router';
     MatDividerModule,
     MatChipsModule,
     RouterModule,
+    QuestCardComponent
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements AfterViewInit, OnDestroy {
   title = "knowledge-quest"
   currentYear = new Date().getFullYear()
   currentIndex = 0
@@ -61,7 +63,7 @@ export class LandingPageComponent {
       createdBy: "Admin",
       createdOn: new Date(),
       questions: []
-     },
+    },
     {
       questName: "Coding Basics",
       questSubject: "Computer Science",
@@ -71,15 +73,25 @@ export class LandingPageComponent {
       questions: []
     },
   ]
-
+  @ViewChild('carousel', {static: false}) carouselRef!: ElementRef;
+  scrollInterval: any;
   visibleQuests: Quest[] = []
 
-  ngOnInit() {
-    this.updateVisibleQuests()
-    // Check for window resize to update visible quests
-    window.addEventListener("resize", () => {
-      this.updateVisibleQuests()
-    })
+  ngAfterViewInit(): void {
+    var carousel = this.carouselRef.nativeElement;
+    const scrollAmount = 1;
+    const delay = 5;
+
+    this.scrollInterval = setInterval(() => {
+      carousel.scrollLeft += scrollAmount;
+      if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+        carousel.scrollLeft = 0;
+      }
+    }, delay);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.scrollInterval);
   }
 
   updateVisibleQuests() {

@@ -18,43 +18,16 @@
           <p>See interactive quests created by individuals around the world.</p>
         </div>
 
-        <div class="carousel-container">
-          <button mat-mini-fab color="basic" class="carousel-nav prev-btn" (click)="prevSlide()">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-
-          <div class="carousel-cards">
-            <mat-card class="quest-card" *ngFor="let quest of visibleQuests">
-              <mat-card-header class="card-header">
-                <mat-card-title>{{ quest.questName }}</mat-card-title>
-                <div></div>
-                <mat-chip-set>
-                  <mat-chip color="accent" highlighted>{{ quest.questSubject }}</mat-chip>
-                </mat-chip-set>
-              </mat-card-header>
-              <mat-card-content>
-                <p class="quest-description">{{ quest.questDescription }}</p>
-              </mat-card-content>
-              <mat-card-actions>
-                <span class="questions-count">{{ quest.questions.length }} questions</span>
-                <button mat-stroked-button color="accent">View Quest</button>
-              </mat-card-actions>
-            </mat-card>
+        <div class="carousel-container" #carousel cdkScrollable>
+          <div class="carousel-cards" [style.width.%]="quests.length * 100">
+            <ng-container *ngFor="let repeat of [0, 1]">
+              <div *ngFor="let quest of quests">
+                <app-quest-card [quest]="quest"></app-quest-card>
+              </div>
+            </ng-container>
           </div>
-
-          <button mat-mini-fab color="basic" class="carousel-nav next-btn" (click)="nextSlide()">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
         </div>
 
-        <div class="carousel-indicators">
-          <button
-            *ngFor="let quest of quests; let i = index"
-            class="indicator-dot"
-            [class.active]="currentIndex === i"
-            (click)="goToSlide(i)">
-          </button>
-        </div>
       </div>
     </section>
 
@@ -82,7 +55,8 @@
               <mat-icon>groups</mat-icon>
             </div>
             <h3>Learn Together</h3>
-            <p>Form teams to compete against your peers! Earn points by answering questions. The team with the most points wins!</p>
+            <p>Form teams to compete against your peers! Earn points by answering questions. The team with the most
+              points wins!</p>
           </div>
         </div>
       </div>
@@ -93,8 +67,8 @@
       <div class="container">
         <h2>Ready to Start Your Quest?</h2>
         <p>Join thousands of educators who are transforming the way students learn.</p>
-        <button mat-raised-button color="accent" class="signup-cta-btn" [routerLink]="['/signup']" routerLinkActive="router-link-active">Sign Up Now</button>
+        <button mat-raised-button color="accent" class="signup-cta-btn" [routerLink]="['/signup']"
+          routerLinkActive="router-link-active">Sign Up Now</button>
       </div>
     </section>
   </main>
-
