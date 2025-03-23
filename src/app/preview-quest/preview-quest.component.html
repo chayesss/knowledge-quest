@@ -7,13 +7,13 @@
       <button mat-stroked-button (click)="openEditQuestDialog(quest)">
         <mat-icon>edit</mat-icon>
         Edit Quest / Questions
-      </button>      
+      </button>
     </mat-card-header>
     <mat-card-content>
-      <mat-chip color="primary" selected>{{ quest?.questSubject }}</mat-chip>
+      <mat-chip color="accent" highlighted>{{ quest?.questSubject }}</mat-chip>
     </mat-card-content>
   </mat-card>
-  <button mat-raised-button color="primary" (click)="startQuest()" [disabled]="quest?.questions?.length === 0">
+  <button mat-raised-button color="accent" (click)="startQuest()" [disabled]="quest?.questions?.length === 0">
     Start the Quest
   </button>
   <mat-tab-group>
@@ -25,9 +25,9 @@
         </div>
 
         <ng-template #questionsAssigned>
-          <app-questions [quest]="quest" 
-                          [questions]="quest?.questions || []" 
-                          [questionsEditable]="true" 
+          <app-questions [quest]="quest"
+                          [questions]="quest?.questions || []"
+                          [questionsEditable]="true"
                           [hideAnswers]="true"></app-questions>
         </ng-template>
       </ng-container>

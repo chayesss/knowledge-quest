@@ -3,10 +3,10 @@
 } @else {
 <div>
   <mat-toolbar class="app-bar" color="primary">
-    <div class="logo">
+    <a [routerLink]="['']" routerLinkActive="router-link-active" class="logo">
       <mat-icon>school</mat-icon>
       <span>Knowledge Quest</span>
-    </div>
+    </a>
     <span class="appbar-spacer"></span>
     <div class="nav-links">
       <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</a>

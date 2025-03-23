@@ -1,41 +1,38 @@
-<div *ngIf="questions.length > 0; else loading">
-  <mat-grid-list cols="5" rowHeight="1:1">
-    <ng-container *ngFor="let question of questions">
-      <mat-grid-tile>
-        <mat-card class="question-card">
-          <mat-card-title>{{ question.questionText }}</mat-card-title>
-          <mat-card-subtitle>{{ question.subject }}</mat-card-subtitle>
-          <mat-card-content>
-            <ng-container *ngIf="!hideAnswers">
-              <ul>
-                <li *ngFor="let option of question.options" class="option-item">
-                  {{ option.answerText }}
-                  <mat-icon *ngIf="option.isCorrect" color="primary" class="checkmark">check_circle</mat-icon>
-                  <mat-icon *ngIf="!option.isCorrect" color="warn" class="crossmark">cancel</mat-icon>
-                </li>
-              </ul>
-            </ng-container>
-          </mat-card-content>
+<div *ngIf="questions.length > 0; else loading" class="questions-container">
+  <ng-container *ngFor="let question of questions">
+    <mat-card class="question-card">
 
-          <!-- Show edit button only if user is the creator -->
-          <button *ngIf="user?.uid === question.createdBy && questionsEditable" 
-            mat-button class="card-action-btn"
-            (click)="editQuestion.emit(question)">
-            Edit Question
-          </button>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{ question.questionText }}</mat-card-title>
+        <div></div>
+        <mat-chip-set>
+          <mat-chip color="accent" highlighted>{{ question.subject }}</mat-chip>
+        </mat-chip-set>
+      </mat-card-header>
+      <mat-card-content class="answers-container">
+        <ng-container *ngIf="!hideAnswers">
+          <ul>
+            <li *ngFor="let option of question.options" class="option-item">
+              {{ option.answerText }}
+              <mat-icon *ngIf="option.isCorrect" color="primary" class="checkmark">check_circle</mat-icon>
+              <mat-icon *ngIf="!option.isCorrect" color="warn" class="crossmark">cancel</mat-icon>
+            </li>
+          </ul>
+        </ng-container>
+      </mat-card-content>
 
-          <button *ngIf="!questionsEditable" 
-              mat-button class="card-action-btn"
-              (click)="handleQuestionToggle(question)">
-              {{ isQuestionInQuest(question) ? 'Remove from Quest' : 'Add to Quest' }}
-          </button>
-      
-      
+      <!-- Show edit button only if user is the creator -->
+      <button *ngIf="user?.uid === question.createdBy && questionsEditable" mat-button class="card-action-btn"
+        (click)="editQuestion.emit(question)">
+        Edit Question
+      </button>
 
-        </mat-card>
-      </mat-grid-tile>
-    </ng-container>
-  </mat-grid-list>
+      <button *ngIf="!questionsEditable" mat-button class="card-action-btn" (click)="handleQuestionToggle(question)">
+        {{ isQuestionInQuest(question) ? 'Remove from Quest' : 'Add to Quest' }}
+      </button>
+
+    </mat-card>
+  </ng-container>
 </div>
 
 <!-- Loading spinner -->
