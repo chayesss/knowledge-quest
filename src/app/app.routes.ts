@@ -8,14 +8,15 @@ import { AddQuestionToQuestComponent } from './question-bank/add-question-to-que
 import { PreviewQuestComponent } from './preview-quest/preview-quest.component';
 import { QuestStartComponent } from './quest-start/quest-start.component';
 import { QuestPlayerComponent } from './quest-player/quest-player.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },  // Redirect root path to /dashboard
+    { path: '', component: LandingPageComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'question-bank', component: QuestionBankComponent },
-    { path: 'quest/add-questions/:id', component: AddQuestionToQuestComponent },
+    { path: 'question-bank', component: QuestionBankComponent , canActivate: [AuthGuard] },
+    { path: 'quest/add-questions/:id', component: AddQuestionToQuestComponent, canActivate: [AuthGuard]  },
     { path: 'quest/preview/:id', component: PreviewQuestComponent },
     { path: 'quest/start/:id', component: QuestStartComponent },
     { path: 'quest/play/:id', component: QuestPlayerComponent }

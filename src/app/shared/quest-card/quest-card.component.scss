@@ -1,0 +1,44 @@
+.quest-card {
+  flex: 1;
+  min-width: 350px;
+  max-width: 350px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quest-description {
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 16px;
+}
+
+.quest-preview {
+  height: 160px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px 16px;
+}
+
+.questions-count {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+}

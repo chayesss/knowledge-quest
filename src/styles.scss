@@ -4,15 +4,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
 
-$knowledge-quest-theme: mat.define-theme((color: (theme-type: light,
-                primary: mat.$red-palette,
-            ),
-            typography: (brand-family: 'Roboto, Material Icons',
-                bold-weight: 900,
-            ),
-        ));
+$primary-palette: mat.m2-define-palette(mat.$m2-grey-palette, 900);
+$tertiary-palette: mat.m2-define-palette(mat.$m2-red-palette, 500);
 
-
+$knowledge-quest-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $tertiary-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, Material Icons',
+    bold-weight: 900,
+  )
+));
 
 body {
     margin: 0;
@@ -22,7 +26,6 @@ body {
 html {
     @include mat.all-component-themes($knowledge-quest-theme);
 
-    background: linear-gradient(to bottom right, #ffebee, #ffcdd2);
     min-height: 100vh;
 
     font-family: Roboto;

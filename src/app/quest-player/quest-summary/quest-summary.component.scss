@@ -1,6 +1,7 @@
 .summary-card {
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 800px;
+  min-width: 800px;
 }
 
 .winner-section {
@@ -82,4 +83,5 @@
 .winner-item .score-content {
   border-color: #ffc107;
   background-color: rgba(255, 193, 7, 0.08);
+  max-width:710px;
 }

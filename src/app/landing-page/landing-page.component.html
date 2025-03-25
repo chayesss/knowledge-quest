@@ -1,0 +1,74 @@
+<div class="app-container">
+
+
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Learning, One Quest At A Time</h1>
+          <p>Create interactive educational games that make learning fun and engaging for students of all ages.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="carousel-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Explore Quests</h2>
+          <p>See interactive quests created by individuals around the world.</p>
+        </div>
+
+        <div class="carousel-container" #carousel cdkScrollable>
+          <div class="carousel-cards" [style.width.%]="quests.length * 100">
+            <ng-container *ngFor="let repeat of [0, 1]">
+              <div *ngFor="let quest of quests">
+                <app-quest-card [canPreview]="false" [quest]="quest"></app-quest-card>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <mat-icon>menu_book</mat-icon>
+            </div>
+            <h3>Create Custom Quests</h3>
+            <p>Design interactive learning experiences tailored to your curriculum and student needs.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <mat-icon>question_mark</mat-icon>
+            </div>
+            <h3>Submit Questions</h3>
+            <p>Create questions for users all around the world to use in their own quests.</p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <mat-icon>groups</mat-icon>
+            </div>
+            <h3>Learn Together</h3>
+            <p>Form teams to compete against your peers! Earn points by answering questions. The team with the most
+              points wins!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Start Your Quest?</h2>
+        <p>Join thousands of educators who are transforming the way students learn.</p>
+        <button mat-raised-button color="accent" class="signup-cta-btn" [routerLink]="['/signup']"
+          routerLinkActive="router-link-active">Sign Up Now</button>
+      </div>
+    </section>
+  </main>

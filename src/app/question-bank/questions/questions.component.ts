@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { User } from 'firebase/auth';
 import { SubmittedQuestion } from '../../shared/models/question.model';
 import { Quest } from '../../shared/models/quest.model';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-questions',
@@ -22,7 +23,8 @@ import { Quest } from '../../shared/models/quest.model';
     MatInputModule,
     MatIcon,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss'
@@ -34,7 +36,7 @@ export class QuestionsComponent {
   @Input() questionsEditable: boolean = true;
   @Output() editQuestion = new EventEmitter<SubmittedQuestion>();
   @Output() addQuestionToQuest = new EventEmitter<SubmittedQuestion>();
-  @Input() hideAnswers: boolean = false;  
+  @Input() hideAnswers: boolean = false;
   @Output() removeQuestionFromQuestEvent = new EventEmitter<SubmittedQuestion>();
 
   isQuestionInQuest(question: SubmittedQuestion): boolean {
@@ -51,7 +53,7 @@ export class QuestionsComponent {
 
   handleQuestionToggle(question: SubmittedQuestion) {
     console.log('Button clicked for question:', question);
-  
+
     if (this.isQuestionInQuest(question)) {
       console.log('Removing question:', question);
       this.removeQuestionFromQuest(question);
@@ -60,7 +62,7 @@ export class QuestionsComponent {
       this.addToQuest(question);
     }
   }
-  
+
 
   addToQuest(question: SubmittedQuestion) {
     this.addQuestionToQuest.emit(question);
@@ -69,5 +71,5 @@ export class QuestionsComponent {
   removeQuestionFromQuest(question: SubmittedQuestion) {
     this.removeQuestionFromQuestEvent.emit(question);
   }
-  
+
 }

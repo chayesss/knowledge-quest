@@ -164,3 +164,30 @@ mat-grid-tile {
     width: var(--card-width);
   }
 }
+
+.questions-container {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  flex: grid-container;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.question-card {
+  max-width: 350px;
+  max-height: 290px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.answers-container {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  max-height: 200px;
+}

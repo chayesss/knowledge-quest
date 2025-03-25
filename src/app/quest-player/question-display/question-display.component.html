@@ -13,7 +13,7 @@
       </div>
     </div>
   </mat-card-content>
-  <mat-card-actions align="end" *ngIf="!isAnswerRevealed">
-    <button mat-raised-button color="primary" (click)="onRevealAnswer()">Reveal Answer</button>
+  <mat-card-actions align="end" *ngIf="!isAnswerRevealed" class="button-container">
+    <button mat-raised-button color="accent" (click)="onRevealAnswer()" class="reveal-button">Reveal Answer</button>
   </mat-card-actions>
 </mat-card>

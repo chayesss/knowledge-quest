@@ -19,7 +19,7 @@
     </form>
 
     <div class="modify-question">
-        <button mat-stroked-button type="button" (click)="onAddQuestion()">
+        <button mat-stroked-button type="button" (click)="onAddQuestion()" class="manage-button">
             <mat-icon fontIcon="edit"></mat-icon> Manage Questions
         </button>
     </div>
@@ -27,5 +27,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-flat-button color="primary" (click)="onEditSubmit()" [disabled]="!editQuestForm.valid">Update</button>
+    <button mat-flat-button color="accent" (click)="onEditSubmit()" [disabled]="!editQuestForm.valid">Update</button>
 </mat-dialog-actions>

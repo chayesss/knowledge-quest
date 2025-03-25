@@ -13,7 +13,8 @@ import { QuestService } from '../shared/services/quest.service';
 import { AuthService } from '../shared/services/auth.service';
 import { Quest } from '../shared/models/quest.model';
 import { User } from 'firebase/auth';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { FormsModule } from '@angular/forms';
+import { QuestCardComponent } from "../shared/quest-card/quest-card.component"; // Import FormsModule for ngModel
 
 @Component({
   selector: 'app-dashboard',
@@ -26,8 +27,9 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
     MatGridListModule,
     MatInputModule,
     RouterModule,
-    FormsModule // Include FormsModule here
-  ],
+    FormsModule,
+    QuestCardComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -74,7 +76,7 @@ export class DashboardComponent {
   openQuestDialog() {
     this.dialog.open(QuestDialogComponent, {
       minWidth: '700px',
-      height: '550px'
+      height: '300px'
     });
   }
 
