@@ -9,31 +9,34 @@
     </a>
     <span class="appbar-spacer"></span>
     <div class="nav-links">
-      <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</a>
+      <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Browse Quests</a>
       <a [routerLink]="['/question-bank']" routerLinkActive="router-link-active">Question Bank</a>
       @if (user) {
-      <div>User: {{user.email}}</div>
       <button mat-button (click)="logout()">Log out</button>
       }
       @else {
-      <button mat-raised-button color="accent" [routerLink]="['/login']" routerLinkActive="router-link-active">Log in</button>
+      <button mat-raised-button color="accent" [routerLink]="['/login']" routerLinkActive="router-link-active">Log
+        in</button>
       }
     </div>
   </mat-toolbar>
   <div class="app-bar-accent" color="accent">
   </div>
-  <div class="app-container">
-    <router-outlet />
-  </div>
+  <div class="wrapper">
+    <div class="app-container">
+      <router-outlet />
+    </div>
     <footer>
       <div class="container">
-          <p>&copy; {{ currentYear }} Knowledge Quest. University of Cincinnati IT EXPO</p>
-          <div>
-            <a href="https://github.com/chayesss/knowledge-quest" target="_blank" class="footer-link"><mat-icon>code</mat-icon> Code Repository</a>
-          </div>
+        <p>&copy; {{ currentYear }} Knowledge Quest. University of Cincinnati IT EXPO</p>
+        <div>
+          <a href="https://github.com/chayesss/knowledge-quest" target="_blank"
+            class="footer-link"><mat-icon>code</mat-icon> Code Repository</a>
         </div>
-      </footer>
+      </div>
+    </footer>
   </div>
+</div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 }

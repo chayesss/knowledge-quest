@@ -76,7 +76,7 @@ export class DashboardComponent {
   openQuestDialog() {
     this.dialog.open(QuestDialogComponent, {
       minWidth: '700px',
-      height: '550px'
+      height: '300px'
     });
   }
 

@@ -83,3 +83,15 @@ footer p {
 .footer-links a:hover {
   text-decoration: underline;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}

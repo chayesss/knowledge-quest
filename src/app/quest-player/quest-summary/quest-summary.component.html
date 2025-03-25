@@ -20,7 +20,7 @@
           [class.winner-item]="isWinner(team)">
           <div class="score-content">
             <div class="score-info">
-              <mat-icon *ngIf="i === 0 && isWinner(team)" color="accent">emoji_events</mat-icon>
+              <mat-icon *ngIf="i === 0 && isWinner(team)" color="primary">emoji_events</mat-icon>
               <span class="team-name">Team {{ team.name }}</span>
             </div>
             <span class="team-points">{{ team.points }} points</span>
@@ -29,7 +29,4 @@
       </mat-list>
     </div>
   </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="onRestart()">Play Again</button>
-  </mat-card-actions>
 </mat-card>

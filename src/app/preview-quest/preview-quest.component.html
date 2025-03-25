@@ -1,17 +1,22 @@
-<div class="container">
+<div class="container" *ngIf="!isLoading">
   <mat-card class="quest-details">
-    <mat-card-header>
-      <mat-card-title>{{ quest?.questName }}</mat-card-title>
-      <mat-card-subtitle>{{ quest?.questDescription }}</mat-card-subtitle>
-      <span class="spacer"></span>
-      <button mat-stroked-button (click)="openEditQuestDialog(quest)">
+    <mat-card-header class="card-header">
+      <mat-card-title>{{ quest!.questName }}</mat-card-title>
+      <div></div>
+      <mat-chip-set>
+        <mat-chip color="accent" highlighted>{{ quest!.questSubject }}</mat-chip>
+      </mat-chip-set>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ quest?.questDescription }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <span class="questions-count">{{ quest!.questions.length }} questions</span>
+      <button mat-stroked-button (click)="openEditQuestDialog(quest)" *ngIf="user != null && user.uid == quest?.createdBy">
         <mat-icon>edit</mat-icon>
         Edit Quest / Questions
       </button>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-chip color="accent" highlighted>{{ quest?.questSubject }}</mat-chip>
-    </mat-card-content>
+    </mat-card-actions>
   </mat-card>
   <button mat-raised-button color="accent" (click)="startQuest()" [disabled]="quest?.questions?.length === 0">
     Start the Quest
@@ -25,10 +30,8 @@
         </div>
 
         <ng-template #questionsAssigned>
-          <app-questions [quest]="quest"
-                          [questions]="quest?.questions || []"
-                          [questionsEditable]="true"
-                          [hideAnswers]="true"></app-questions>
+          <app-questions [quest]="quest" [questions]="quest?.questions || []" [questionsEditable]="true"
+            [hideAnswers]="true"></app-questions>
         </ng-template>
       </ng-container>
     </mat-tab>
