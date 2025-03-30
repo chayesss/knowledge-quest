@@ -8,6 +8,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     CommonModule,
   provideRouter(routes),
   provideClientHydration(),
+  provideHttpClient(),
   provideFirebaseApp(() =>
     initializeApp({
       "projectId": import.meta.env['NG_APP_FIREBASE_PROJECT_ID'],

@@ -38,6 +38,7 @@ export class QuestDialogComponent {
 
   QuestForm: FormGroup;
   currentUser: User | undefined;
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,12 +72,10 @@ export class QuestDialogComponent {
         questions: []
       }
 
+      this.isLoading = true;
       this.questService.submitQuest(quest).subscribe({
         next: (response: any) => {
-          this.snackBar.open('Quest Created! ID: ' + response.id, '', {
-            duration: 3000
-          })
-          this.router.navigate(['/quest/add-questions/', response.id])
+          this.router.navigate(['/quest/create/', response.id])
         },
         error: (err: any) => {
           this.snackBar.open('Quest Failed to Create ' + err, '', {
