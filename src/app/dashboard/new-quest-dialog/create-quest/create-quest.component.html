@@ -1,0 +1,104 @@
+<div class="container">
+  <mat-card class="quest-card">
+    <mat-card-header>
+      @if (!isLoading) {
+        <mat-card-title class="title">Create Questions</mat-card-title>
+      } @else {
+        <mat-card-title class="title">Generating Questions...</mat-card-title>
+      }
+    </mat-card-header>
+    @if (!isLoading) {
+      <mat-card-content>
+        <p class="description">
+          Choose how you want to create questions for your quest. Generate AI-powered questions or choose your own custom challenges. You can edit generated questions later.
+        </p>
+        
+        <div class="buttons-container">
+          <div>
+            <button 
+              *ngIf="!showAIOptions" 
+              mat-raised-button 
+              color="warn" 
+              class="action-button" 
+              (click)="toggleAIOptions()">
+              Generate AI Questions
+            </button>
+            
+            <div *ngIf="showAIOptions" class="ai-options-container">
+              <form [formGroup]="aiForm" (ngSubmit)="useAIGenerateQuestions()">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Difficulty</mat-label>
+                  <mat-select formControlName="difficulty">
+                    <mat-option *ngFor="let level of difficultyLevels" [value]="level.value">
+                      {{level.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Number of Questions</mat-label>
+                  <input 
+                    matInput 
+                    type="number" 
+                    formControlName="questionCount" 
+                    min="1" 
+                    max="50">
+                  <mat-error *ngIf="aiForm.get('questionCount')?.hasError('required')">
+                    Number of questions is required
+                  </mat-error>
+                  <mat-error *ngIf="aiForm.get('questionCount')?.hasError('min')">
+                    Minimum 1 question
+                  </mat-error>
+                  <mat-error *ngIf="aiForm.get('questionCount')?.hasError('max')">
+                    Maximum 25 questions
+                  </mat-error>
+                </mat-form-field>
+                
+                <button 
+                  mat-raised-button 
+                  color="warn" 
+                  class="action-button" 
+                  type="submit"
+                  [disabled]="aiForm.invalid">
+                  Generate Questions
+                </button>
+              </form>
+            </div>
+          </div>
+          
+          <div class="divider-container" *ngIf="!showAIOptions">
+            <mat-divider></mat-divider>
+            <span class="divider-text">or</span>
+          </div>
+          
+          <button 
+            *ngIf="!showAIOptions"
+            mat-raised-button 
+            color="warn" 
+            class="action-button" 
+            (click)="createMyOwnQuestions()">
+            Create My Own Questions
+          </button>
+          
+          <button 
+            *ngIf="showAIOptions"
+            mat-button 
+            class="back-button" 
+            (click)="showAIOptions = false">
+            Back to Options
+          </button>
+        </div>
+      </mat-card-content>
+    } @else if (isLoading && showAIOptions) {
+      <mat-card-content>        
+        <p class="description">
+          This may take a few moments.
+        </p>
+        <div >
+          <mat-spinner class="center-spinner"></mat-spinner>
+        </div>
+      </mat-card-content>
+    }
+    
+  </mat-card>
+</div>

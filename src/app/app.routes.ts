@@ -9,6 +9,7 @@ import { PreviewQuestComponent } from './preview-quest/preview-quest.component';
 import { QuestStartComponent } from './quest-start/quest-start.component';
 import { QuestPlayerComponent } from './quest-player/quest-player.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CreateQuestComponent } from './dashboard/new-quest-dialog/create-quest/create-quest.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
@@ -19,5 +20,6 @@ export const routes: Routes = [
     { path: 'quest/add-questions/:id', component: AddQuestionToQuestComponent, canActivate: [AuthGuard]  },
     { path: 'quest/preview/:id', component: PreviewQuestComponent },
     { path: 'quest/start/:id', component: QuestStartComponent },
-    { path: 'quest/play/:id', component: QuestPlayerComponent }
+    { path: 'quest/play/:id', component: QuestPlayerComponent },
+    { path: 'quest/create/:id', component: CreateQuestComponent },
 ];

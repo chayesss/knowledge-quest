@@ -15,6 +15,7 @@ import { Quest } from '../shared/models/quest.model';
 import { User } from 'firebase/auth';
 import { FormsModule } from '@angular/forms';
 import { QuestCardComponent } from "../shared/quest-card/quest-card.component"; // Import FormsModule for ngModel
+import { OpenaiService } from '../shared/services/openai.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,7 @@ import { QuestCardComponent } from "../shared/quest-card/quest-card.component"; 
     RouterModule,
     FormsModule,
     QuestCardComponent
-],
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -44,7 +45,8 @@ export class DashboardComponent {
     private dialog: MatDialog,
     private questService: QuestService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private openaiService: OpenaiService,
   ) {
     this.authService.getCurrentUser().subscribe((currentUser) => {
       if (currentUser) {

@@ -73,8 +73,6 @@ export class AddQuestionToQuestComponent implements OnInit {
   
     this.questService.addQuestionToQuest(this.quest, question).subscribe({
       next: () => {
-        // No need to push the question manually here, it is already done in the service
-        console.log('Updated quest questions:', this.quest!.questions); // Debugging log
         this.snackBar.open('Question added to quest!', '', { duration: 3000 });
       },
       error: (err: any) => {

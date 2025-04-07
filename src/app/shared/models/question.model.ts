@@ -2,7 +2,7 @@ export interface SubmittedQuestion {
     questionText: string,
     subject?: string,
     options: Answer[],
-    status: string,
+    status?: string,
     createdBy?: string,
     createdOn?: Date,
     questId?: string;
