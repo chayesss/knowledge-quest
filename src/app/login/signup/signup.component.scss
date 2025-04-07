@@ -1,7 +1,9 @@
 .login-card {
     max-width: 400px;
+    min-width: 400px;
     margin: 2em auto;
     text-align: center;
+
 }
 
 mat-form-field {
@@ -28,4 +30,8 @@ mat-card-header {
 
 p {
     margin-top: 0;
+}
+
+.password-requirements {
+    text-align: left;
 }

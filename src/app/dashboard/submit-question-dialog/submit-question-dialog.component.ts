@@ -104,7 +104,7 @@ export class SubmitQuestionDialogComponent {
       this.questionService.submitQuestion(question).subscribe({
         next: (response) => {
 
-          this.snackBar.open('Question Submitted! ID: ' + response.id, '', {
+          this.snackBar.open('Question Created!', '', {
             duration: 3000
           })
         },

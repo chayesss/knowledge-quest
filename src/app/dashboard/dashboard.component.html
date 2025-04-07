@@ -5,7 +5,7 @@
     <mat-form-field class="search-field">
       <input matInput placeholder="Search for Quests" [(ngModel)]="searchTerm" (input)="filterQuests()">
     </mat-form-field>
-    <button mat-flat-button (click)="openQuestDialog()" color="accent">Create Quest</button>
+    <button mat-flat-button (click)="openQuestDialog()" color="accent" *ngIf="user">Create Quest</button>
   </div>
 
   <div class="quests-container" *ngIf="filteredQuests.length > 0; else noResults">
