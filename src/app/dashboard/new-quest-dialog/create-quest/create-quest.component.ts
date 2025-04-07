@@ -16,6 +16,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatInputModule } from '@angular/material/input';
 import { OpenaiService } from '../../../shared/services/openai.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-quest',
@@ -47,7 +48,8 @@ export class CreateQuestComponent {
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
-    private openaiService: OpenaiService
+    private openaiService: OpenaiService,
+    private snackBar: MatSnackBar,
   ) {
     this.aiForm = this.fb.group({
       difficulty: ['', Validators.required],
@@ -87,20 +89,25 @@ export class CreateQuestComponent {
     this.openaiService.generateQuestions(this.quest!.questName, this.quest!.questDescription, this.quest!.questSubject, this.aiForm.value.difficulty, this.aiForm.value.questionCount).then((questions) => {
       questions.subscribe({
         next: (questions) => {
-          if (questions) {
+          console.log(questions)
+          if (questions.length > 0) {
             this.questionService.bulkSubmitQuestions(questions, this.user!.uid, this.quest!).subscribe({
               next: (response) => {
                 this.router.navigate(['/quest/preview/', this.quest!.id])
               },
               error: (err) => {
-                console.error(err);
+                this.snackBar.open('Failed to generate questions, please refresh and try again ', '', {
+                  duration: 3000,
+                })
               }
             });
           }
           else {
-            console.log(questions);
+            this.snackBar.open('Failed to generate questions, please refresh and try again ', '', {
+              duration: 3000,
+            })
           }
-        }
+        },
       });
 
     });
