@@ -40,7 +40,7 @@ export class OpenaiService {
         });
 
         // USE FOR LOCAL FUNCTION TESTING ONLY
-        this.functionPath = 'http://127.0.0.1:5001/knowledgequest-dbc73/us-central1/generateQuestions';
+        //this.functionPath = 'http://127.0.0.1:5001/knowledgequest-dbc73/us-central1/generateQuestions';
         const observable = this.http.post<any>(this.functionPath, { messages }, { headers }).pipe(
           map((response) => {
             const rawMessage = response.choices[0].message.content;
