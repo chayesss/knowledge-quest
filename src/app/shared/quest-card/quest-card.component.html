@@ -10,7 +10,7 @@
     <p class="quest-description">{{ quest!.questDescription }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <span class="questions-count">{{ quest!.questions.length }} questions</span>
+    <span class="questions-count">{{ canPreview ? quest!.questions.length : 15}} questions</span>
     <button mat-stroked-button *ngIf="canPreview" (click)="previewQuest(quest!.id!)">View Quest</button>
   </mat-card-actions>
 </mat-card>

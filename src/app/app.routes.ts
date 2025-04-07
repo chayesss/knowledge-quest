@@ -13,7 +13,7 @@ import { CreateQuestComponent } from './dashboard/new-quest-dialog/create-quest/
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'question-bank', component: QuestionBankComponent , canActivate: [AuthGuard] },
@@ -21,5 +21,5 @@ export const routes: Routes = [
     { path: 'quest/preview/:id', component: PreviewQuestComponent },
     { path: 'quest/start/:id', component: QuestStartComponent },
     { path: 'quest/play/:id', component: QuestPlayerComponent },
-    { path: 'quest/create/:id', component: CreateQuestComponent },
+    { path: 'quest/create/:id', component: CreateQuestComponent, canActivate: [AuthGuard] },
 ];
